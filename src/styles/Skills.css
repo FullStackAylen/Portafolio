@@ -24,10 +24,10 @@
   .skills ul li {
     margin: 10px 20px;
     font-size: 1.2em;
-    background-color: #4a90e2;
-    color: white;
+    background-color: #2a2a2a;
+    color: #fafafa;
     padding: 10px 20px;
     border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px #616060;
   }
   

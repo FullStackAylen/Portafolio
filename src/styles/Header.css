@@ -48,6 +48,44 @@
   color: #4a90e2;
 }
 
+/* Icono */
+.language-icon {
+  position: relative; /* Para posicionar el menú de idiomas */
+  display: inline-block; /* Para que el menú se alinee correctamente */
+  margin: auto;
+  top: 2px;
+  color: #6ba3e4;
+}
+
+.language-menu {
+  position: absolute; /* Posiciona el menú en relación al ícono */
+  top: 30px; /* Ajusta según sea necesario */
+  left: 0px; /* Alinea a la derecha */
+  background-color: white; /* Fondo blanco */
+  border: 1px solid #ccc; /* Bordes del menú */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  z-index: 10; /* Asegúrate de que esté encima de otros elementos */
+  border-radius: 4px; /* Esquinas redondeadas */
+}
+
+.language-menu button {
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  padding: 10px 15px; /* Espaciado alrededor del texto */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  width: 100%; /* Hacer que el botón ocupe el ancho completo */
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.language-menu button:hover {
+  background-color: #f0f0f0; /* Color de fondo al pasar el mouse */
+}
+.language-menu button{
+  color: #333;
+}
+
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .nav-links {

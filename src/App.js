@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from './components/Header';
 import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Skills from './components/Skills';
 import { motion } from 'framer-motion';
+import './i18n'; 
 
 import './App.css';
 
@@ -18,6 +20,7 @@ import './App.css';
           transition={{ duration: 1 }}
         >
           <About />
+          <Experience/>
           <Skills />
           <Projects />
           <Contact />
