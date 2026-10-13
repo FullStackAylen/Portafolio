@@ -22,7 +22,8 @@ function Header() {
       transition={{ type: "spring", stiffness: 120 }}
     >
       <div className="container">
-        <h1 className="logo">Aylén Rodríguez</h1>
+        {/* El h1 de la página vive en el Hero (AGENTS.md §7: un solo h1). */}
+        <p className="logo">Aylén Rodríguez</p>
         <nav>
           <ul className="nav-links">
             <li><a href="#about">{t('about')}</a></li>

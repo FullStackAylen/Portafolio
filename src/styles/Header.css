@@ -18,6 +18,7 @@
 }
 
 .logo {
+  margin: 0; /* el `p` global de App.css agrega margin-bottom: 20px */
   font-size: 1.8rem;
   font-weight: bold;
   color: #fff;

@@ -1,0 +1,48 @@
+/* Tokens del sistema — única ubicación con valores sueltos (DESIGN_SYSTEM.md §2-§5).
+   Hoy lo usa el hero (Fase 4a); el resto del sitio migra en la Fase 2. */
+
+:root {
+  /* Color — ratios verificados en DESIGN_SYSTEM.md §2 y §2.1 */
+  --color-canvas: #F4F2ED;      /* 16.19:1 con ink */
+  --color-ink: #14161A;
+  --color-ink-muted: #5A6068;   /*  5.67:1 con canvas */
+  --color-line: #D6D2C8;        /* reglas y geometría decorativa (no-texto) */
+  --color-signal: #E4572E;      /*  3.29:1 → solo display/UI sobre papel */
+  --color-signal-ink: #B33A16;  /*  5.31:1 → acento COMO TEXTO sobre papel */
+  --color-instrument: #1F4E5F;  /*  8.11:1 */
+  --color-focus-ring: #1F4E5F;  /*  8.11:1 → anillo de foco (min 3:1) */
+
+  /* Tipografía: voces de sistema. La Fase 2 las reemplaza por @fontsource
+     (Space Grotesk + Inter) — pendiente de aprobación de dependencia. */
+  --font-display: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Escala fluida (DESIGN_SYSTEM.md §3) */
+  --text-display: clamp(2.75rem, 1rem + 8.5vw, 7.5rem);
+  --text-body: 1.0625rem;
+  --text-label: 0.8125rem;
+  --text-mono: 0.875rem;
+
+  /* Espaciado — escala de 4px (DESIGN_SYSTEM.md §4) */
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-16: 64px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container-max: 1200px;
+
+  /* Movimiento (ANIMATION_GUIDELINES.md §2) */
+  --motion-quick: 140ms;
+  --motion-base: 240ms;
+  --motion-emphasis: 420ms;
+  --motion-cinematic: 900ms;
+  --motion-stagger: 70ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Capa viva (ANIMATION_GUIDELINES.md §6) */
+  --hero-header-gap: 64px;      /* altura aprox. del header sticky actual */
+  --hero-influence-radius: 140px;
+}

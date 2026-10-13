@@ -1,0 +1,203 @@
+/* Hero — composición asimétrica sobre papel (concepto "Precisión viva").
+   Solo selectores de clase .hero__*: App.css redefine `p`, `h2` y `a` a nivel
+   global, así que ningún elemento crudo se estiliza desde acá. */
+
+.hero {
+  position: relative;
+  isolation: isolate;              /* la capa viva queda contenido del stacking */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-canvas);
+  padding: var(--space-16) var(--gutter);
+  overflow: hidden;                /* la capa viva nunca crea scroll horizontal */
+  min-height: 560px;               /* fallback sin svh */
+  min-height: max(560px, calc(100svh - var(--hero-header-gap)));
+}
+
+/* Capa decorativa: canvas de ReactiveLayer.js. Nunca porta información. */
+.hero__layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  animation: hero-layer-in var(--motion-cinematic) var(--ease-out) var(--motion-stagger) backwards;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* --- Reveal por máscara: cada línea entra desde abajo, escalonada --- */
+.hero__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;         /* evita cortar colas de "g", "y" */
+  margin-bottom: -0.06em;
+}
+
+.hero__line-inner {
+  display: block;
+  animation: hero-line-in var(--motion-emphasis) var(--ease-out) backwards;
+  animation-delay: calc(var(--hero-i, 0) * var(--motion-stagger));
+}
+
+/* --- Kicker: metadata en mono --- */
+.hero__kicker {
+  --hero-i: 1;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-instrument);
+}
+
+/* --- Nombre: el protagonista --- */
+.hero__name {
+  --hero-i: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  text-align: left;
+  text-wrap: balance;
+}
+
+.hero__name .hero__line:nth-child(2) {
+  --hero-i: 3;
+}
+
+/* --- Columna editorial: rol + descripción --- */
+.hero__aside {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.hero__role {
+  --hero-i: 4;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.hero__desc {
+  --hero-i: 5;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--color-ink-muted);  /* 5.67:1 sobre papel */
+  text-align: left;
+  max-width: 42ch;
+}
+
+/* --- CTA de scroll --- */
+.hero__cta {
+  --hero-i: 6;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: var(--space-2);
+  transition:
+    color var(--motion-quick) var(--ease-standard),
+    border-color var(--motion-quick) var(--ease-standard);
+}
+
+.hero__cta:hover {
+  color: var(--color-signal-ink);   /* 5.31:1 sobre papel */
+  border-color: var(--color-signal);
+}
+
+.hero__cta:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.hero__cta-arrow {
+  display: inline-block;
+  transition: transform var(--motion-quick) var(--ease-standard);
+}
+
+.hero__cta:hover .hero__cta-arrow,
+.hero__cta:focus-visible .hero__cta-arrow {
+  transform: translateY(2px);
+}
+
+/* --- Composición asimétrica en desktop (≥900px) --- */
+@media (min-width: 900px) {
+  .hero__content {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    grid-template-areas:
+      "kicker kicker"
+      "name   aside"
+      "cta    aside";
+    column-gap: var(--space-16);
+    align-items: end;
+  }
+
+  .hero__kicker { grid-area: kicker; }
+  .hero__name { grid-area: name; }
+  .hero__cta { grid-area: cta; }
+
+  .hero__aside {
+    grid-area: aside;
+    align-self: end;
+    border-left: 1px solid var(--color-line);
+    padding-left: var(--space-6);
+  }
+}
+
+/* --- Movimiento reducido: composición final estática, sin capa animada --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__line-inner,
+  .hero__layer {
+    animation: none;
+  }
+
+  .hero__layer {
+    opacity: 1;
+  }
+
+  .hero__cta,
+  .hero__cta-arrow {
+    transition: none;
+  }
+}
+
+@keyframes hero-line-in {
+  from {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-layer-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

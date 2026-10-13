@@ -8,6 +8,12 @@ i18n
     resources: {
       en: {
         translation: {
+          hero_kicker: "Portfolio",
+          hero_name_1: "Aylén",
+          hero_name_2: "Rodríguez",
+          hero_role: "Software Developer",
+          hero_desc: "Building software, exploring ideas, and turning complex problems into thoughtful digital experiences.",
+          hero_cta: "Scroll to explore",
           about: "About Me",
           presentation: "I am Aylén Rodríguez, a passionate software developer with experience in C#, .NET, ASP.NET, React, and more. I focus on creating clean, efficient, and scalable code.",
           presentation_2: "I am constantly learning, allowing me to adapt to the needs of my environment.",
@@ -31,6 +37,12 @@ i18n
       },
       es: {
         translation: {
+            hero_kicker: "Portafolio",
+            hero_name_1: "Aylén",
+            hero_name_2: "Rodríguez",
+            hero_role: "Desarrolladora de Software",
+            hero_desc: "Construyo software, exploro ideas y convierto problemas complejos en experiencias digitales cuidadas.",
+            hero_cta: "Desplázate para explorar",
             about: "Acerca de mí",
             presentation: "Soy Aylén Rodríguez, una apasionada desarrolladora de software con experiencia en C#, .NET, ASP.NET, React y más. Me enfoco en crear código limpio, eficiente y escalable.",
             presentation_2: "Estoy en constantem aprendizaje, lo que me permite adaptarme a las necesidades de mi entorno.",
