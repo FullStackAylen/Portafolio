@@ -64,6 +64,12 @@ function ProjectCard({ project, ghRepo }) {
                 <dd>{cs.problem}</dd>
               </>
             )}
+            {cs.decisions && (
+              <>
+                <dt>{t('case_decisions')}</dt>
+                <dd>{cs.decisions}</dd>
+              </>
+            )}
             {cs.outcome && (
               <>
                 <dt>{t('case_outcome')}</dt>
@@ -73,17 +79,32 @@ function ProjectCard({ project, ghRepo }) {
           </dl>
         )}
 
-        <a
-          className="project-card__link button button--quiet"
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('viewProj')}
-          <span className="visually-hidden">
-            {` — ${project.name} (${t('opens_new_tab')})`}
-          </span>
-        </a>
+        <span className="project-card__actions">
+          <a
+            className="project-card__link button button--quiet"
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('viewProj')}
+            <span className="visually-hidden">
+              {` — ${project.name} (${t('opens_new_tab')})`}
+            </span>
+          </a>
+          {project.repository && (
+            <a
+              className="button button--quiet"
+              href={project.repository}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('view_code')}
+              <span className="visually-hidden">
+                {` — ${project.name} (${t('opens_new_tab')})`}
+              </span>
+            </a>
+          )}
+        </span>
       </div>
     </article>
   );

@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-14T21:25:52.571Z",
+  "fetchedAt": "2026-10-14T22:17:05.192Z",
   "profile": {
     "login": "FullStackAylen",
     "name": "Aylen Rodriguez",
@@ -11,34 +11,34 @@
     "profileUrl": "https://github.com/FullStackAylen"
   },
   "totals": {
-    "commitsLastYear": 7,
+    "commitsLastYear": 8,
     "stars": 3
   },
   "languages": [
     {
       "name": "C#",
       "bytes": 190807,
-      "share": 0.4995614597760434
+      "share": 0.4664204278785982
     },
     {
       "name": "JavaScript",
-      "bytes": 126329,
-      "share": 0.3307483459833643
+      "bytes": 142688,
+      "share": 0.3487953692115144
     },
     {
       "name": "CSS",
-      "bytes": 44233,
-      "share": 0.11580865508222302
+      "bytes": 54953,
+      "share": 0.13433051079474342
     },
     {
       "name": "HTML",
-      "bytes": 16309,
-      "share": 0.04269941798512367
+      "bytes": 16369,
+      "share": 0.040013395650813514
     },
     {
       "name": "TypeScript",
       "bytes": 4271,
-      "share": 0.011182121173245643
+      "share": 0.010440296464330413
     }
   ],
   "repos": [
@@ -47,7 +47,7 @@
       "description": "Protafolio profesional",
       "language": "JavaScript",
       "stars": 1,
-      "pushedAt": "2026-10-14T20:08:44Z",
+      "pushedAt": "2026-10-14T21:54:34Z",
       "url": "https://github.com/FullStackAylen/Portafolio"
     },
     {

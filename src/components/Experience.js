@@ -31,7 +31,16 @@ function Experience() {
               <p className="experience__period">{item.period}</p>
               <h3 className="experience__role">{item.role}</h3>
               <p className="experience__company">{item.company}</p>
-              {item.summary && <p className="experience__summary">{item.summary}</p>}
+              {/* El propietario separa párrafos con \n\n: se preservan. */}
+              {item.summary &&
+                item.summary
+                  .split('\n\n')
+                  .filter(Boolean)
+                  .map((paragraph, i) => (
+                    <p className="experience__summary" key={`${item.id}-p${i}`}>
+                      {paragraph}
+                    </p>
+                  ))}
             </Reveal>
           ))}
         </ol>

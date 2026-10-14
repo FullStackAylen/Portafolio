@@ -1,19 +1,48 @@
-// Habilidades verificadas del propietario (lista original del sitio).
-// Editar solo con contenido real del propietario — AGENTS.md §3.
+
 export const skills = [
+  // Languages
   'C#',
   'JavaScript',
+  'Python',
+  'PHP',
+
+  // Backend & APIs
   '.NET',
   'ASP.NET MVC Core',
   '.NET MAUI',
-  'React JS',
-  'Git',
-  'SQL Server',
-  'Python',
-  'PHP',
+  'Web API',
+  'REST APIs',
+  'Node.js',
+  'Express.js',
   'Laravel 8',
+
+  // Frontend & desktop
+  'React JS',
   'WPF',
   'Windows Forms',
-  'Web API',
-  'Blazor',
+
+  // Databases
+  'SQL Server',
+  'SQL',
+  'No Relational Databases',
+
+  // Version control & collaboration
+  'Git',
+  'Jira',
+  'Notion',
+
+  // Industrial integration & communication
+  'MQTT',
+  'UDP',
+  'LoRaWAN',
+  'GPS Integration',
+  'RFID / AEI',
+
+  // Engineering practices
+  'API Integration',
+  'Software Architecture',
+  'Debugging',
+
+  // Other
+  'IA',
 ];

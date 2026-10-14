@@ -89,10 +89,20 @@
   color: var(--color-ink);
 }
 
-/* Link estirado: el pseudo cubre toda la card; el link real queda enfocable */
-.project-card__link {
-  align-self: flex-start;
+/* Link estirado: el pseudo cubre toda la card y dispara el link principal;
+   el botón "Ver código" se eleva (z-index) para ser clickeable por encima. */
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
   margin-top: auto;
+  padding-top: var(--space-2);
+  align-self: flex-start;
+}
+
+.project-card__actions .button:not(.project-card__link) {
+  position: relative;
+  z-index: 1;
 }
 
 .project-card__link::after {

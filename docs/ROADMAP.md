@@ -37,6 +37,26 @@ CSS 4.50 kB gz · 18/18 checks estáticos. Docs actualizados: DESIGN_SYSTEM §2/
 About internacionalizado. Pendiente de verificación en vivo (viewports, teclado,
 reduce-motion) cuando haya navegador de escritorio disponible.
 
+### Actualización de contenido del propietario (2026-10-14, posterior a N6)
+
+El propietario reemplazó todo el contenido real. Correcciones de integración hechas
+(sin inventar nada, solo cableado + i18n):
+
+- **Experience**: 2 experiencias reales (Janus Automation, Gestioner Soft). Los `\n\n`
+  de los resúmenes se preservan como párrafos. Secciones enumeradas 01–05.
+- **Projects**: proyectos nuevos (FinanceApp, Samaritana) con caseStudy COMPLETO
+  (problem/role/stack/decisions/outcome). Se agregó render de `decisions` (faltaba),
+  botón "Ver código" cuando hay `repository`, y cruce de meta GitHub por `repository`
+  (el `link` ahora es el deploy, no el repo). Descripciones reescritas en i18n
+  (`project_finance`, `project_samaritana`) — las claves viejas `proyect_1/2`
+  describían proyectos que ya no existen. `TypeScript` duplicado removido del stack.
+- **Skills**: lista ampliada a 31 pills. Stagger ahora dinámico (`0.6 / n`), siempre
+  ≤ 600 ms totales (§4.3).
+- **GitHub snapshot refrescado**: 8 commits/12m. `FinanceApp` → 404 (repo privado o
+  inexistente): su card no muestra meta de GitHub pero el link al deploy funciona.
+- **Pendiente del propietario**: `repository` de Samaritana (vacío en los datos).
+- Build tras integración: 60/60 claves · JS 120.22 kB gz · CSS 4.52 kB gz · todo verde.
+
 **Resultados N1–N5 (2026-10-14):** build OK · 57/57 claves i18n · JS 117.90 kB gz ·
 CSS 4.50 kB gz (presupuestos: 150 / 10 kB). Bebas Neue auto-hospedada (13.7 kB woff2).
 `npm run fetch:github` → snapshot real: 5 lenguajes (C# 50 %, JS 33 %), 9 repos,

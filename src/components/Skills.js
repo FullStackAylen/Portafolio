@@ -6,11 +6,16 @@ import { skills } from '../data/skills';
 import githubData from '../data/github.json';
 import SectionHeading from './SectionHeading';
 
-// Stagger de pills (§4.3): 15 hijos obligan a comprimir el escalón a 35 ms
-// para respetar el tope de 600 ms totales (15 × 35 = 525 ms).
+// Stagger de pills (§4.3): el escalón se calcula para respetar el techo de
+// 600 ms totales sin importar cuántas pills haya (hoy 31 → ~19 ms cada una).
 const listVariants = {
   hidden: {},
-  visible: { transition: { delayChildren: 0.05, staggerChildren: 0.035 } },
+  visible: {
+    transition: {
+      delayChildren: 0.05,
+      staggerChildren: Math.min(0.035, 0.6 / Math.max(skills.length, 1)),
+    },
+  },
 };
 
 const pillVariants = {

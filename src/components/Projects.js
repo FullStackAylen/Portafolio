@@ -8,9 +8,9 @@ import ProjectCard from './ProjectCard';
 
 /**
  * Projects — N4 (dirección Netflix): fila de cards con cover SVG generado y
- * meta real del snapshot de GitHub. El nombre del repo se deriva del link de
- * cada proyecto para cruzarlo con src/data/github.json; si no hay match la
- * card igual funciona (solo se omite la meta).
+ * meta real del snapshot de GitHub. El cruce usa el campo `repository` de cada
+ * proyecto (el `link` apunta al deploy, no al repo); si no hay match la card
+ * igual funciona (solo se omite la meta).
  */
 function Projects() {
   const reposByName = React.useMemo(() => {
@@ -20,8 +20,9 @@ function Projects() {
     return map;
   }, []);
 
-  const repoNameFromLink = (link) => {
-    const match = /\/([^/]+?)(?:\.git)?$/.exec(link);
+  const repoNameFromUrl = (url) => {
+    if (!url) return '';
+    const match = /github\.com\/[^/]+\/([^/]+?)(?:\.git)?\/?$/.exec(url);
     return match ? match[1].toLowerCase() : '';
   };
 
@@ -31,7 +32,7 @@ function Projects() {
       <div className="project-row">
         {projects.map((project, index) => (
           <Reveal key={project.id} delay={index * 0.07} className="project-row__item">
-            <ProjectCard project={project} ghRepo={reposByName[repoNameFromLink(project.link)]} />
+            <ProjectCard project={project} ghRepo={reposByName[repoNameFromUrl(project.repository)]} />
           </Reveal>
         ))}
       </div>
