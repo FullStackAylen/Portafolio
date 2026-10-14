@@ -17,6 +17,7 @@ capa reactiva, parallax, casos de estudio).
 | Sistema visual (tokens, tipografía, componentes) | `docs/DESIGN_SYSTEM.md` |
 | Movimiento (duración, easing, rendimiento, reduced-motion) | `docs/ANIMATION_GUIDELINES.md` |
 | Fases, estado y criterios de verificación | `docs/ROADMAP.md` |
+| Deploy en Vercel, env vars y acceso a la CLI | `docs/DEPLOY.md` |
 | Auditoría técnica de partida (stack, deudas, riesgos) | conversación de auditoría inicial |
 
 Consultá esos documentos antes de diseñar o animar algo. No reimplementes reglas que ya

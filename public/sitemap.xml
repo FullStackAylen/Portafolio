@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fase 7. URL del dominio de producción actual (DEPLOY.md §4.1):
+     si se recupera un dominio propio, reemplazar my-portafolio-beige.vercel.app. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://my-portafolio-beige.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

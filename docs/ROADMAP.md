@@ -22,7 +22,7 @@
 | **4a** | **Primera implementación pequeña (campo + hero)** | 🟡 **Implementada y medida** · pendiente verificación en vivo |
 | **5** | **Motion system de scroll** | ✅ **Completada** *(2026-10-14)* · verificación en vivo pendiente |
 | **6** | **Proyectos como casos de estudio** | ✅ **Estructura completada** *(2026-10-14)* · campos `caseStudy` a completar por el propietario |
-| **7** | **SEO y compartibilidad** | ✅ **Completada** *(2026-10-14)* · `og:url`/canonical/sitemap esperan dominio de producción |
+| **7** | **SEO y compartibilidad** | ✅ **Completada** *(2026-10-14)* · `og:url`/canonical/sitemap ahora apuntan a la URL de producción de Vercel (`DEPLOY.md` §4.1) |
 | 8 | Testing y observabilidad | ⬜ Opcional *(no ejecutada)* |
 | 9 | Migración a Vite | ⬜ Opcional / final *(no ejecutada)* |
 

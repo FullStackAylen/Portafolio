@@ -29,6 +29,11 @@ check('preload de fuentes', (html.match(/rel="preload"/g) || []).length === 2);
 check('JSON-LD Person', html.includes('application/ld+json') && html.includes('"@type": "Person"'));
 check('title propio', html.includes('Aylén Rodríguez — Software Developer'));
 check('theme-color', html.includes('name="theme-color"'));
+check('og:url + canonical', html.includes('property="og:url"') && html.includes('rel="canonical"'));
+const sitemap = fs.readFileSync(path.join(__dirname, '../build/sitemap.xml'), 'utf8');
+check('sitemap.xml con loc', sitemap.includes('<loc>https://'));
+const robots = fs.readFileSync(path.join(__dirname, '../build/robots.txt'), 'utf8');
+check('robots.txt enlaza sitemap', robots.includes('Sitemap: https://'));
 
 // 4. Presupuestos (AGENTS.md §8)
 const walk = (d) =>

@@ -22,3 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Vercel CLI (docs/DEPLOY.md �4)
+.vercel/
+.vercel
+.env*
