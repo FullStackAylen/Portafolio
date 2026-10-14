@@ -40,10 +40,9 @@ function About() {
           </motion.div>
         </div>
         <div className="about__text">
-          <p>
-            {t('presentation')}<br />
-            {t('presentation_2')}
-          </p>
+          <p>{t('about_p1')}</p>
+          <p>{t('about_p2')}</p>
+          <p>{t('about_p3')}</p>
           <blockquote>
             {t('quote')}
           </blockquote>

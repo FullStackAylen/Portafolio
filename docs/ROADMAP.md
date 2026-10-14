@@ -57,6 +57,16 @@ El propietario reemplazó todo el contenido real. Correcciones de integración h
 - **Pendiente del propietario**: `repository` de Samaritana (vacío en los datos).
 - Build tras integración: 60/60 claves · JS 120.22 kB gz · CSS 4.52 kB gz · todo verde.
 
+### Ajuste de contenido del propietario (2026-10-14, 2.ª tanda)
+
+- **About reescrito** (3 párrafos, voz propia, sin frase de Steve Jobs): claves
+  `about_p1/p2/p3` + `quote` nueva ("Good software is built with curiosity…", sin
+  atribución — es del propietario). `presentation`/`presentation_2` eliminadas.
+- **Links de proyectos = deploy de la app** (decisión del propietario): se quitó el
+  botón "Ver código" y la clave `view_code`. Los repos son **privados**; el GitHub
+  público se menciona en la sección Skills (link "Ver perfil").
+- Build: 60/60 claves · JS 120.47 kB gz · CSS 4.50 kB gz · todo verde.
+
 **Resultados N1–N5 (2026-10-14):** build OK · 57/57 claves i18n · JS 117.90 kB gz ·
 CSS 4.50 kB gz (presupuestos: 150 / 10 kB). Bebas Neue auto-hospedada (13.7 kB woff2).
 `npm run fetch:github` → snapshot real: 5 lenguajes (C# 50 %, JS 33 %), 9 repos,

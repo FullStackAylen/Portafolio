@@ -79,32 +79,19 @@ function ProjectCard({ project, ghRepo }) {
           </dl>
         )}
 
-        <span className="project-card__actions">
-          <a
-            className="project-card__link button button--quiet"
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('viewProj')}
-            <span className="visually-hidden">
-              {` — ${project.name} (${t('opens_new_tab')})`}
-            </span>
-          </a>
-          {project.repository && (
-            <a
-              className="button button--quiet"
-              href={project.repository}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t('view_code')}
-              <span className="visually-hidden">
-                {` — ${project.name} (${t('opens_new_tab')})`}
-              </span>
-            </a>
-          )}
-        </span>
+        {/* Links = deploy de la app (decisión del propietario: los repos son
+            privados; el GitHub público se menciona en la sección Skills). */}
+        <a
+          className="project-card__link button button--quiet"
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t('viewProj')}
+          <span className="visually-hidden">
+            {` — ${project.name} (${t('opens_new_tab')})`}
+          </span>
+        </a>
       </div>
     </article>
   );
