@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/Index.css';
+// Las fuentes (@font-face + preload) viven en public/index.html: CRA no deja
+// referenciar /public desde CSS sin romper el build.
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -9,4 +10,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-

@@ -273,11 +273,20 @@ function ReactiveLayer({ containerRef }) {
     reducedQuery.addEventListener('change', refresh);
     pointerQuery.addEventListener('change', refresh);
 
-    buildScene();
-    refresh();
+    // Init diferido 2 rAF: la capa es decorativa (§5.2-7) y no compite con el
+    // primer paint del contenido en CPUs con throttle (presupuesto LCP, AGENTS §8).
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        buildScene();
+        refresh();
+      });
+    });
 
     return () => {
       stop();
+      cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
       observer.disconnect();
       resizeObserver.disconnect();
       container.removeEventListener('pointermove', onPointerMove);

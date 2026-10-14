@@ -1,37 +1,67 @@
 /* Tokens del sistema — única ubicación con valores sueltos (DESIGN_SYSTEM.md §2-§5).
-   Hoy lo usa el hero (Fase 4a); el resto del sitio migra en la Fase 2. */
+   Fase 2: set completo. Todo el CSS del sitio referencia estas variables. */
 
 :root {
   /* Color — ratios verificados en DESIGN_SYSTEM.md §2 y §2.1 */
-  --color-canvas: #F4F2ED;      /* 16.19:1 con ink */
+  --color-canvas: #F4F2ED;        /* 16.19:1 con ink */
+  --color-surface: #FFFFFF;       /* tarjetas, formulario */
+  --color-surface-sunk: #E9E6DF;  /* fondos de inputs, pills */
   --color-ink: #14161A;
-  --color-ink-muted: #5A6068;   /*  5.67:1 con canvas */
-  --color-line: #D6D2C8;        /* reglas y geometría decorativa (no-texto) */
-  --color-signal: #E4572E;      /*  3.29:1 → solo display/UI sobre papel */
-  --color-signal-ink: #B33A16;  /*  5.31:1 → acento COMO TEXTO sobre papel */
-  --color-instrument: #1F4E5F;  /*  8.11:1 */
-  --color-focus-ring: #1F4E5F;  /*  8.11:1 → anillo de foco (min 3:1) */
+  --color-ink-muted: #5A6068;     /*  5.67:1 con canvas */
+  --color-line: #D6D2C8;          /* reglas y bordes (no-texto) */
+  --color-signal: #E4572E;        /*  3.29:1 → display/UI sobre papel */
+  --color-signal-ink: #B33A16;    /*  5.31:1 → acento COMO TEXTO sobre papel */
+  --color-signal-deep: #8F2D10;   /* hover de primarios (blanco: 8.2:1) */
+  --color-instrument: #1F4E5F;    /*  8.11:1 */
+  --color-success: #1B6B45;
+  --color-danger: #A3231C;
+  --color-focus-ring: #1F4E5F;    /*  anillo de foco (min 3:1) */
 
-  /* Tipografía: voces de sistema. La Fase 2 las reemplaza por @fontsource
-     (Space Grotesk + Inter) — pendiente de aprobación de dependencia. */
-  --font-display: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  /* Tipografía: auto-hospedada (@font-face en styles/fonts.css + preload en
+     index.html). La voz mono es de sistema → 0 kB. */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
   /* Escala fluida (DESIGN_SYSTEM.md §3) */
-  --text-display: clamp(2.75rem, 1rem + 8.5vw, 7.5rem);
-  --text-body: 1.0625rem;
+  --text-display: clamp(3rem, 1.6rem + 9vw, 7.5rem);
+  --text-h1: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+  --text-h2: clamp(1.5rem, 1.3rem + 1.2vw, 2.25rem);
+  --text-body: clamp(1rem, 0.98rem + 0.1vw, 1.125rem);
   --text-label: 0.8125rem;
   --text-mono: 0.875rem;
+  --measure: 65ch;
 
   /* Espaciado — escala de 4px (DESIGN_SYSTEM.md §4) */
+  --space-1: 4px;
   --space-2: 8px;
+  --space-3: 12px;
   --space-4: 16px;
   --space-6: 24px;
   --space-8: 32px;
+  --space-12: 48px;
   --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
   --container-max: 1200px;
+  --section-y: clamp(4rem, 9vw, 8rem);
+
+  /* Radios y elevación (DESIGN_SYSTEM.md §4) */
+  --radius-none: 0;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(20, 22, 26, 0.06), 0 1px 1px rgba(20, 22, 26, 0.04);
+  --shadow-2: 0 8px 24px -8px rgba(20, 22, 26, 0.16);
+
+  /* Z-index en escala única (DESIGN_SYSTEM.md §5) */
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+
+  /* Altura del header sticky: offset de anclas y del drawer móvil */
+  --header-offset: 80px;
 
   /* Movimiento (ANIMATION_GUIDELINES.md §2) */
   --motion-quick: 140ms;
@@ -42,7 +72,7 @@
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
 
-  /* Capa viva (ANIMATION_GUIDELINES.md §6) */
-  --hero-header-gap: 64px;      /* altura aprox. del header sticky actual */
+  /* Capa viva del hero (ANIMATION_GUIDELINES.md §6) */
+  --hero-header-gap: 64px;
   --hero-influence-radius: 140px;
 }

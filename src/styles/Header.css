@@ -1,95 +1,185 @@
+/* Header — barra sticky sobre surface con regla inferior (DESIGN_SYSTEM.md §6.6).
+   Mobile-first: a ≤768px la nav pasa a drawer anclado al header. */
+
 .header {
-  background-color: #333;
-  color: white;
-  padding: 20px;
   position: sticky;
   top: 0;
+  z-index: var(--z-header);
   width: 100%;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+  padding-block: var(--space-3);
 }
 
-.container {
+.header__container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 .logo {
-  margin: 0; /* el `p` global de App.css agrega margin-bottom: 20px */
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #fff;
-  letter-spacing: 2px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+}
+
+/* Toggle del menú móvil (oculto en desktop) */
+.header__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-ink);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color var(--motion-quick) var(--ease-standard);
+}
+
+.header__toggle:hover {
+  border-color: var(--color-ink);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
-}
-
-.nav-links li {
-  transition: transform 0.3s ease;
-}
-
-.nav-links li:hover {
-  transform: scale(1.1);
+  align-items: center;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-  color: #fff;
+  display: inline-block;
+  padding-block: var(--space-1);
+  color: var(--color-ink);
+  font-size: var(--text-body);
+  font-weight: 500;
   text-decoration: none;
-  font-size: 1.1rem;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--motion-quick) var(--ease-standard),
+    border-color var(--motion-quick) var(--ease-standard);
 }
 
+/* Micro-interacción del sistema: el subrayado se enciende en signal */
 .nav-links a:hover {
-  color: #4a90e2;
+  border-bottom-color: var(--color-signal);
 }
 
-/* Icono */
-.language-icon {
-  position: relative; /* Para posicionar el menú de idiomas */
-  display: inline-block; /* Para que el menú se alinee correctamente */
-  margin: auto;
-  top: 2px;
-  color: #6ba3e4;
+/* Selector de idioma (DESIGN_SYSTEM.md §6.7) */
+.language {
+  position: relative;
 }
 
-.language-menu {
-  position: absolute; /* Posiciona el menú en relación al ícono */
-  top: 30px; /* Ajusta según sea necesario */
-  left: 0px; /* Alinea a la derecha */
-  background-color: white; /* Fondo blanco */
-  border: 1px solid #ccc; /* Bordes del menú */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-  z-index: 10; /* Asegúrate de que esté encima de otros elementos */
-  border-radius: 4px; /* Esquinas redondeadas */
+.language__toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: var(--space-2);
+  color: var(--color-instrument);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color var(--motion-quick) var(--ease-standard);
 }
 
-.language-menu button {
-  background: none; /* Sin fondo */
-  border: none; /* Sin borde */
-  padding: 10px 15px; /* Espaciado alrededor del texto */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  width: 100%; /* Hacer que el botón ocupe el ancho completo */
-  text-align: left; /* Alinear el texto a la izquierda */
+.language__toggle:hover,
+.language__toggle[aria-expanded='true'] {
+  color: var(--color-signal-ink);
 }
 
-.language-menu button:hover {
-  background-color: #f0f0f0; /* Color de fondo al pasar el mouse */
+.language__menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  z-index: var(--z-overlay);
+  min-width: 150px;
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-2);
 }
-.language-menu button{
-  color: #333;
+
+.language__menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--motion-quick) var(--ease-standard);
 }
 
+.language__menu button:hover {
+  background: var(--color-surface-sunk);
+}
 
+.language__menu button[aria-current='true'] {
+  color: var(--color-signal-ink);
+  font-weight: 600;
+}
 
-/* Responsive */
+/* --- ≤768px: botón + drawer anclado al header --- */
 @media (max-width: 768px) {
+  .header__toggle {
+    display: inline-flex;
+  }
+
+  /* Drawer: opacidad + traslación mínima (solo transform/opacity, §9-1) */
+  .header__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-6) var(--gutter);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition:
+      opacity var(--motion-base) var(--ease-standard),
+      transform var(--motion-base) var(--ease-standard),
+      visibility 0s linear var(--motion-base);
+  }
+
+  .header__nav--open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity var(--motion-base) var(--ease-standard),
+      transform var(--motion-base) var(--ease-standard);
+  }
+
   .nav-links {
     flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .language__menu {
+    position: static;
+    box-shadow: var(--shadow-1);
+    margin-top: var(--space-2);
   }
 }

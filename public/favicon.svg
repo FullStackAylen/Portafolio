@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Iniciales sobre los tokens del sistema: papel + tinta + tick signal.
+       Placeholder del propietario: si quiere otra marca, reemplazar este archivo. -->
+  <rect width="64" height="64" rx="12" fill="#F4F2ED" />
+  <text
+    x="32"
+    y="41"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="28"
+    font-weight="700"
+    fill="#14161A"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >AR</text>
+  <rect x="24" y="48" width="16" height="3" rx="1.5" fill="#E4572E" />
+</svg>

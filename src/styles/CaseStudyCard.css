@@ -1,0 +1,103 @@
+/* CaseStudyCard — tarjeta de caso de estudio (DESIGN_SYSTEM.md §6.3).
+   Estado draft: borde punteado + nota honesta de contenido pendiente. */
+
+.case-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard);
+}
+
+.case-card:hover,
+.case-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+/* Estado draft: el borde comunica "contenido pendiente" sin fingir termino */
+.case-card--draft {
+  border-style: dashed;
+}
+
+.case-card__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-instrument);
+}
+
+.case-card--draft .case-card__kicker {
+  color: var(--color-ink-muted);
+}
+
+.case-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.case-card__desc {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  max-width: var(--measure);
+}
+
+.case-card__note {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--color-ink-muted);
+  border-left: 2px solid var(--color-line);
+  padding-left: var(--space-3);
+}
+
+.case-card__fields {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  width: 100%;
+}
+
+.case-card__fields dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-instrument);
+}
+
+.case-card__fields dd {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+/* Stretched link: el link cubre la tarjeta; el foco se dibuja en el link */
+.case-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+}
+
+.case-card__link:focus-visible::after {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -4px;
+}

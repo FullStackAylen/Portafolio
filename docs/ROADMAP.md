@@ -14,28 +14,32 @@
 | — | Auditoría técnica completa (solo lectura, con Lighthouse) | ✅ Completada |
 | — | **Cambio de dirección creativa** (documentado, sin tocar código) | ✅ Completada |
 | 0 | Base de trabajo y baseline | 🟡 Parcial *(baseline de Lighthouse capturado en la auditoría)* |
-| 1 | Higiene técnica | ⬜ Pendiente de aprobación |
-| 2 | Sistema de diseño | ⬜ Pendiente de aprobación |
-| 3 | Accesibilidad y UX base | ⬜ Pendiente de aprobación |
-| **4** | **Hero y lenguaje de movimiento** | ⬜ **Esperando elegir propuesta (A/B/C)** |
+| **1a** | **Higiene técnica: seguridad y dependencias** | ✅ **Completada** |
+| **1b** | **Higiene técnica: estructura y CSS** | ✅ **Completada** *(2026-10-14)* |
+| **2** | **Sistema de diseño** | ✅ **Completada** *(2026-10-14)* |
+| **3** | **Accesibilidad y UX base** | ✅ **Completada** *(2026-10-14)* · verificación en vivo pendiente |
+| **4** | **Hero y lenguaje de movimiento** | 🟢 **Cubierta por 4a** *(hibridación A+B aprobada)* · scroll-padding quedó en Fase 3 |
 | **4a** | **Primera implementación pequeña (campo + hero)** | 🟡 **Implementada y medida** · pendiente verificación en vivo |
-| 5 | Motion system de scroll | ⬜ Pendiente de aprobación |
-| 6 | Proyectos como casos de estudio | ⬜ Pendiente de aprobación |
-| 7 | SEO y compartibilidad | ⬜ Pendiente de aprobación |
-| 8 | Testing y observabilidad | ⬜ Opcional |
-| 9 | Migración a Vite | ⬜ Opcional / final |
+| **5** | **Motion system de scroll** | ✅ **Completada** *(2026-10-14)* · verificación en vivo pendiente |
+| **6** | **Proyectos como casos de estudio** | ✅ **Estructura completada** *(2026-10-14)* · campos `caseStudy` a completar por el propietario |
+| **7** | **SEO y compartibilidad** | ✅ **Completada** *(2026-10-14)* · `og:url`/canonical/sitemap esperan dominio de producción |
+| 8 | Testing y observabilidad | ⬜ Opcional *(no ejecutada)* |
+| 9 | Migración a Vite | ⬜ Opcional / final *(no ejecutada)* |
 
 **Plataforma verificada (2026-10):** el código corre sobre **Create React App**
 (`react-scripts 5.0.1`); **no hay Vite** en el repo (`vite.config.*` ni `index.html` en
 la raíz). El código está en GitHub y se despliega en Vercel. Vite queda como Fase 9.
 
-**Sí se hizo (sesiones de preparación):** `npm install` (motion, lucide-react), MCP
-`context7` + `motion`/`motion-plus`, skill `motion`, este set de documentos, auditoría
-completa con Lighthouse y el cambio de dirección creativa documentado en
-`PRODUCT_BRIEF.md` §1.1.
+**Sí se hizo (preparación):** `npm install` (motion), MCP `context7` + `motion`/`motion-plus`,
+skill `motion`, este set de documentos, auditoría completa con Lighthouse y el cambio de
+dirección creativa documentado en `PRODUCT_BRIEF.md` §1.1.
 
-**No se hizo:** **ningún cambio de código, ni de estilo, ni de contenido.** La app sigue
-idéntica al commit `cd2aaa7`.
+**Sí se hizo (fases ejecutadas):** **1a** (seguridad), **1b** (estructura/CSS), **2**
+(sistema de diseño), **3** (accesibilidad/UX), **4a** (piloto hero), **5** (motion de
+scroll), **6** (casos de estudio, estructura) y **7** (SEO). **No se hizo:** fases 8 y 9
+(opcionales), migración a Vite, cero contenido inventado, sin dependencias nuevas sin
+aprobar. El código sigue en CRA; los cambios **no están commiteados** — commit y push
+los hace el propietario.
 
 ---
 
@@ -52,56 +56,94 @@ idéntica al commit `cd2aaa7`.
 
 ---
 
-## Fase 1 — Higiene técnica *(sin cambios visuales)*
+## Fase 1a — Higiene técnica: seguridad y dependencias ✅ *(completada 2026-10-13)*
 
 **Objetivo:** eliminar deuda que frena todo lo demás. Cero impacto visual.
 
-**Entregables**
-1. Migrar `emailjs-com` → `@emailjs/browser` (paquete deprecado).
-2. Claves de EmailJS a `.env` (`REACT_APP_*`), `.env` en `.gitignore`.
-3. Eliminar dependencias muertas: `web-vitals`, `@testing-library/*` *(reintegrar en Fase 8)*.
-4. Unificar animación: eliminar `framer-motion` en favor de `motion` **(requiere aprobación)**.
-5. Extraer datos a `src/data/` y traducciones a `src/locales/`.
-6. Resolver colisiones CSS globales (`.container`, `h2`, `p` redefinidos).
-7. Eliminar la carga de Poppins sin usar.
+**Hecho**
+1. ✅ `emailjs-com` → `@emailjs/browser` (API oficial: `send(..., { publicKey })`).
+2. ✅ Claves EmailJS a `.env` (`REACT_APP_*`); `.env` agregado a `.gitignore`.
+3. ✅ Eliminadas: `@testing-library/*` (3), `web-vitals`, `lucide-react`
+   *(reintegrar en Fase 8/Fase 3 con aprobación; para el menú móvil alcanza `react-icons`)*.
+4. ✅ Animación unificada: `framer-motion` → `motion/react` (3 imports) y `framer-motion` desinstalada.
+5. ✅ Poppins (`<link>` de Google Fonts, sin usar) eliminado de `index.html`.
 
-**Verificación:** idéntico visualmente · `npm run build` OK · Lighthouse no baja ·
-`grep` sin referencias a paquetes eliminados.
+**Pendiente del propietario (bloquea el próximo deploy):** **(a)** rotar las claves de
+EmailJS en el dashboard (quedaron en el historial de git) y actualizar `.env`;
+**(b)** cargar `REACT_APP_EMAILJS_SERVICE_ID`, `REACT_APP_EMAILJS_TEMPLATE_ID` y
+`REACT_APP_EMAILJS_PUBLIC_KEY` en Vercel → Settings → Environment Variables.
+
+**Resultados medidos (Lighthouse CLI, producción, móvil emulado)**
+
+| Métrica | Baseline Fase 0 | Tras 4a | Tras 1a |
+|---|---|---|---|
+| Performance | 70 | 81 | **87** |
+| Accesibilidad | 93 | 96 | 96 |
+| LCP | 3239 ms | 2610 ms | **2357 ms** ✅ ≤2500 |
+| TBT | 912 ms | 615 ms | **448 ms** |
+| FCP | 1507 ms | 1521 ms | **815 ms** |
+| CLS | 0.000 | 0.000 | 0.000 |
+| JS gz / CSS gz | 98.03 / 1.33 kB | 100.17 / 2.52 kB | **109.59** / 2.52 kB ✅ ≤150 |
+
+El +9.42 kB de JS es el costo del unificado a `motion@14` (aún 27 % por debajo del
+presupuesto; palanca futura: `LazyMotion`). `npm audit`: 109 vulnerabilidades, **todas
+en el árbol build/dev de `react-scripts`** (jest, webpack-dev-server) — no viajan al
+bundle desplegado; su resolución es la Fase 9 (Vite). Los 2 fallos de `color-contrast`
+siguen siendo los preexistentes (About y Contact → Fases 2 y 3).
 
 ---
 
-## Fase 2 — Sistema de diseño
+## Fase 1b — Higiene técnica: estructura y CSS ✅ *(completada 2026-10-14)*
+
+**Objetivo:** mantenibilidad con **cero impacto visual**.
+
+1. ✅ Extraer datos a `src/data/` (`skills.js`, `projects.js`) y traducciones a
+   `src/locales/en.json|es.json` (`i18n.js` importa los JSON, sin `require` inline).
+2. ✅ Resolver colisiones CSS globales (`.container` → `.header__container`; `h2`, `p`,
+   `a`, `button` scopeados por componente).
+
+**Verificación:** ✅ build OK · ✅ i18n 25/25 claves · ✅ cero selectores globales
+(verificador estático) · Lighthouse **no bajó** (98 de performance tras la fase).
+
+---
+
+## Fase 2 — Sistema de diseño ✅ *(completada 2026-10-14)*
 
 **Objetivo:** que exista un lenguaje visual coherente antes de animar nada.
 
-**Entregables**
-1. `src/styles/tokens.css` con todos los tokens de `DESIGN_SYSTEM.md`.
-2. Tipografía auto-hospedada (`@fontsource`: Space Grotesk + Inter).
-3. Escala tipográfica fluida (`clamp`) y escala de espaciado de 4px.
-4. Un solo ancho de contenedor y ritmo vertical uniforme por sección.
-5. Componentes base: `SectionHeading`, `Button`, `FormField`.
+**Hecho**
+1. ✅ `src/styles/tokens.css` completo: color, espaciado, radios, shadows, z-index,
+   motion (duraciones/easings) + `--header-offset`.
+2. ✅ Tipografía auto-hospedada **vendored**: `public/fonts/*.woff2` + `@font-face` en
+   `public/index.html` con `<link rel="preload" crossorigin>`.
+   *(No `@fontsource` desde CSS: `css-loader` de CRA no resuelve `/public` desde CSS —
+   probado y falló. Los paquetes `@fontsource-variable/*` se desinstalaron.)*
+3. ✅ Escala fluida `clamp()` y ritmo vertical uniforme por sección.
+4. ✅ Un solo ancho de contenedor.
+5. ✅ Componentes base: `SectionHeading`, `Button` (estados), labels de form en Fase 3.
 
-**Verificación:** contraste AA en todos los textos · sin hex ni px sueltos en CSS ·
-360/768/1440 px sin scroll horizontal · un solo sistema tipográfico cargado.
+**Resultados:** contraste AA · sin hex ni px sueltos en CSS de componente · Lighthouse
+a11y **100** (los 2 fallos preexistentes resueltos) · perf **99** · LCP **2054 ms**.
 
 ---
 
-## Fase 3 — Accesibilidad y UX base
+## Fase 3 — Accesibilidad y UX base ✅ *(completada 2026-10-14)*
 
 **Objetivo:** WCAG 2.1 AA y navegación que funcione en móvil.
 
-**Entregables**
-1. Skip-link + `:focus-visible` global.
-2. Header responsive real (hamburguesa `lucide-react` + drawer + ARIA).
-3. `scroll-padding-top` para anclas bajo el header sticky.
-4. `LanguageSwitcher` como `<button>` con `aria-expanded`, cierre con `Escape`.
-5. Formulario: labels asociados, estados `idle/sending/success/error`, `aria-live`,
-   sin `alert()`, limpiar solo en éxito.
-6. `MotionConfig reducedMotion="user"` en `App.js`.
-7. `html lang` sincronizado con i18n.
+**Hecho**
+1. ✅ Skip-link (#hero) + `:focus-visible` global + `scroll-padding-top` (App.css).
+2. ✅ Header responsive real: hamburguesa `FaBars`/`FaTimes` + drawer + `aria-expanded`
+   /`aria-controls` + `Escape` + clic fuera (`react-icons`, ya instalado).
+3. ✅ `scroll-padding-top` para anclas bajo el header sticky.
+4. ✅ Botón de idioma con `aria-current`; drawer se cierra con `Escape`.
+5. ✅ Formulario: labels `htmlFor/id`, estados `idle/sending/success/error`, `aria-live`
+   (`role=status/alert`), sin `alert()`, limpiar solo en éxito, honeypot `company`.
+6. ✅ `MotionConfig reducedMotion="user"` en `App.js`.
+7. ✅ `html lang` sincronizado con i18n. Alt de la foto corregido.
 
-**Verificación:** flujo completo con teclado · axe-core sin errores críticos ·
-modo reduce-motion funcional · EN/ES sin claves faltantes.
+**Resultados:** Lighthouse a11y **100** · perf 98 · **verificación en vivo (teclado,
+viewports, reduce-motion) pendiente — sin navegador de escritorio conectado.**
 
 ---
 
@@ -111,8 +153,8 @@ modo reduce-motion funcional · EN/ES sin claves faltantes.
 protagonista + **una** capa reactiva al cursor (`PRODUCT_BRIEF.md` §1.1).
 **Primera pieza de rediseño visible.**
 
-> ⏳ **Bloqueada en la selección:** elegir una de las 3 propuestas de
-> `ANIMATION_GUIDELINES.md` §5 — **A "Campo"** · **B "Órbita"** · **C "Marea"**.
+> ✅ **Selección hecha (2026-10):** **A "Campo"** con detalles de **B "Órbita"**
+> (hibridación aprobada por el propietario), implementada en la Fase 4a.
 > El avión y la intro narrativa quedan **descartados**.
 
 **Entregables (comunes a la propuesta elegida)**
@@ -180,60 +222,73 @@ verificación en vivo de 60 fps (Performance a CPU 6×), navegación por teclado
 
 ---
 
-## Fase 5 — Motion system de scroll
+## Fase 5 — Motion system de scroll ✅ *(completada 2026-10-14)*
 
 **Objetivo:** que todo el sitio respire con un mismo lenguaje.
 
-**Entregables**
-1. Hook/componente `<Reveal>` (`whileInView`, `once`, 420 ms, stagger 70 ms).
-2. Reemplazar el `fadeInUp` CSS actual (que se dispara al montar) por reveals en viewport.
-3. Parallax sutil en 1–2 elementos por sección.
-4. Stagger en pills de Skills.
-5. Hover corregido a `1.02` máx (hoy `1.05`/`1.1`).
-6. *Opcional:* `lenis` para smooth scroll — **requiere aprobación**.
+**Hecho**
+1. ✅ `Reveal.js`: `whileInView` + `once`, **fade 120 ms + slide 420 ms** (reveal
+   partido: el contenido nunca espera a la cascada para ser visible), `y20`.
+2. ✅ `fadeInUp` CSS reemplazado por reveals en viewport.
+3. ✅ Parallax sutil ±12 px en el marco de foto de About (`usePrefersReducedMotion` lo
+   apaga con `reduce`).
+4. ✅ Stagger en pills de Skills: 35 ms × 15 = 525 ms (≤ 600).
+5. ✅ Hovers corregidos a `1.02` máx.
+6. ✅ `lenis`: **no incorporado** (requiere aprobación; no justificado).
+7. ✅ `usePrefersReducedMotion.js` en `src/hooks/`.
 
-**Verificación:** 60 fps móvil · 0 CLS por animación · reveals no re-disparan al subir ·
-reduce-motion desactiva parallax y stagger.
+**Resultados:** perf 98 · CLS 0 · **60 fps en CPU 6× y reveals en vivo pendientes de
+verificación** (sin navegador conectado).
 
 ---
 
-## Fase 6 — Proyectos como casos de estudio
+## Fase 6 — Proyectos como casos de estudio ✅ *(estructura completada 2026-10-14)*
 
 **Objetivo:** que los proyectos se lean como decisiones, no como nombres.
 
-**Entregables**
-1. Esquema de caso de estudio en `src/data/projects.js` (campos `draft` sin rellenar).
-2. Componente `CaseStudyCard` con card completamente clicable (hoy la affordance rota).
-3. Layout de listado con jerarquía (proyecto destacado vs. resto).
-4. Estados `draft`/`empty` honestos.
-5. ⚠️ **El propietario completa** `problem`, `role`, `decisions`, `outcome`.
+**Hecho**
+1. ✅ Esquema `caseStudy` en `src/data/projects.js` (campos **vacíos**, sin rellenar).
+2. ✅ `CaseStudyCard.js` + CSS: card clicable completa (stretched link), borde punteado
+   de estado `draft`, texto oculto "abre en una pestaña nueva".
+3. ✅ Layout de listado con jerarquía (destacado vs. resto).
+4. ✅ Estados `draft`/`empty` honestos + 7 claves i18n (EN/ES).
+5. ⚠️ **El propietario completa** `problem`, `role`, `decisions`, `outcome` — **ningún
+   campo fue rellenado con contenido inventado.**
 
-**Verificación:** card navegable con teclado · sin "hover fantasma" ·
-**cero contenido inventado** · EN/ES completos.
+**Verificación:** ✅ cero contenido inventado · ✅ EN/ES completos (44/44 claves) ·
+navegación con teclado de la card → pendiente en vivo.
 
 ---
 
-## Fase 7 — SEO y compartibilidad
+## Fase 7 — SEO y compartibilidad ✅ *(completada 2026-10-14)*
 
 **Objetivo:** que el portfolio se encuentre y se vea bien al compartirlo.
 
-**Entregables**
-1. `title` + `meta description` reales (hoy: "My Portfolio" / "Personal Portfolio").
-2. Open Graph + Twitter Card + canonical + `theme-color`.
-3. `manifest.json` propio (hoy: "Create React App Sample") y enlazado en el HTML.
-4. Favicon propio, `sitemap.xml`, JSON-LD `Person`.
-5. Evaluación de prerender para preview en redes.
+**Hecho**
+1. ✅ `title` + `meta description` reales en `public/index.html`.
+2. ✅ Open Graph + Twitter Card + `theme-color`.
+   ⚠️ `og:url` y `canonical` **pendientes del dominio definitivo** de producción.
+3. ✅ `manifest.json` propio (borrados `logo192.png`/`logo512.png` de CRA).
+4. ✅ Favicon propio `public/favicon.svg` (iniciales AR) · JSON-LD `Person`.
+   `sitemap.xml` pendiente del dominio.
+5. Evaluación de prerender: **no necesaria** — Lighthouse SEO 100 sin prerender;
+   el preview en redes se re-verifica al conocerse el dominio.
 
-**Verificación:** Lighthouse SEO ≥95 · preview correcto al compartir · `html lang` correcto.
+**Verificación:** ✅ Lighthouse SEO **100** · preview y `html lang` → ver en vivo con
+dominio.
 
 ---
 
-## Fase 8 — Testing y observabilidad *(opcional)*
+## Fase 8 — Testing y observabilidad *(opcional — no ejecutada)*
 
 **Entregables:** Vitest + Testing Library (form, nav, i18n) · Playwright E2E
 (contacto, cambio de idioma, nav móvil) · `web-vitals` activo · Lighthouse CI.
 
 **Verificación:** suites verdes en CI.
+
+**Por qué no se ejecutó:** opcional en este ciclo; agregar dependencias de testing
+requiere justificación y aprobación (AGENTS §12). Hoy la verificación estática vive en
+`scripts/verify-static.js` (15 checks: build, i18n, presupuestos, selectores globales).
 
 ---
 
@@ -248,8 +303,36 @@ migración sigue pendiente y **no se adelanta** mientras haya fases de diseño a
 **Regla:** solo después de que el diseño esté estabilizado. No migrar en paralelo con
 cambios visuales.
 
+**Por qué no se ejecutó aún:** la migración renombra el prefijo de env vars
+`REACT_APP_*` → `VITE_*`; hacerla antes de que el propietario cargue las claves de
+EmailJS en Vercel obligaría a hacer el trabajo dos veces.
+
 **Verificación:** build ≤ al actual en tamaño · todas las verificaciones de fases
 anteriores pasan · dev server arranca · `npm start` documentado en `AGENTS.md`.
+
+---
+
+## Resultados acumulados (2026-10-14 — build de producción, Lighthouse CLI móvil)
+
+| Métrica | Fase 0 (baseline) | Final | Tope (AGENTS §8) |
+|---|---|---|---|
+| Performance | 70 | **97–98** | — |
+| Accesibilidad | 93 | **100** | — |
+| Best practices / SEO | 100 / 100 | **100 / 100** | — |
+| LCP | 3239 ms | **~2376 ms** (mediana; banda 2205–2507) | ≤ 2500 ✅ |
+| TBT | 912 ms | **~27 ms** | ≤ 200 ✅ |
+| CLS | 0.000 | **0.000** | < 0.1 ✅ |
+| JS gz | 98.03 kB | **115.23 kB** | ≤ 150 ✅ |
+| CSS gz | 1.33 kB | **3.50 kB** | ≤ 10 ✅ |
+
+**Notas**
+- La banda de LCP (2205–2507 ms) es **ruido del modelo de Lighthouse**: el mismo build
+  repetido oscila; el diff de sub-procesos demostró que ningún cambio explica la
+  variación. Mediana ~2376 ms.
+- Verificación estática: `node scripts/verify-static.js` → **15/15** (i18n 44/44,
+  cero selectores globales, un solo `h1`, presupuestos OK).
+- **Pendiente en vivo** (sin navegador de escritorio conectado): viewports 360/768/1440,
+  navegación por teclado, `prefers-reduced-motion`, grabación a 60 fps CPU 6×.
 
 ---
 

@@ -27,8 +27,11 @@ están escritas: referencialas.
 ## 2. Stack real y comandos
 
 ```
-React 18.3.1 · react-scripts 5.0.1 (CRA) · framer-motion 11.5.4 · motion 14.2.0
-lucide-react 1.56.0 · i18next + react-i18next (EN/ES) · emailjs-com (deprecado)
+React 18.3.1 · react-scripts 5.0.1 (CRA) · motion 14.2.0 (unificado en la Fase 1a;
+antes también framer-motion) · i18next + react-i18next (EN/ES)
+@emailjs/browser (claves en .env — ver §6) · react-icons 5.3.0
+Fuentes self-hosted vendored en public/fonts/*.woff2 (@font-face en public/index.html;
+@fontsource NO funciona con css-loader de CRA — probado)
 CSS puro, sin preprocesador · JavaScript (sin TypeScript)
 ```
 
@@ -37,6 +40,7 @@ npm install          # dependencias
 npm start            # dev server → http://localhost:3000
 npm run build        # build de producción → /build (gitignorado)
 npm test             # Jest (hoy sin tests)
+node scripts/verify-static.js   # verificador estático (i18n, presupuestos, selectores)
 ```
 
 ### ⚠️ Windows + CRA: sensibilidad a mayúsculas
@@ -106,7 +110,8 @@ Se definen en `docs/DESIGN_SYSTEM.md`. Resumen ejecutable:
 
 - **Tokens primero**: todo valor sale de `:root` en `styles/tokens.css`.
 - **Un solo sistema tipográfico**: display + body + mono de sistema. Sin Google Fonts
-  por `<link>` (se auto-hospeda con `@fontsource` cuando se llegue a esa fase).
+  por `<link>`; las fuentes están **auto-hospedadas ya** (`public/fonts/*.woff2`,
+  `@font-face` en `public/index.html` — Fase 2).
 - **Contraste AA mínimo**: 4.5:1 en texto normal, 3:1 en texto grande y UI.
 - **Mobile-first**: breakpoints `480 / 768 / 1024 / 1280`. Sin layouts que solo
   funcionen en desktop.
@@ -119,8 +124,10 @@ Se definen en `docs/DESIGN_SYSTEM.md`. Resumen ejecutable:
 ## 6. Seguridad
 
 1. **Ningún secreto en el repositorio.** Las claves de EmailJS van en `.env`
-   (`REACT_APP_*` en CRA) y `.env` está en `.gitignore`. Hoy están hardcodeadas en
-   `src/components/Contact.js` — deuda de la Fase 1.
+   (`REACT_APP_*` en CRA) y `.env` está en `.gitignore` (Fase 1a). **Pendiente del
+   propietario:** rotar las claves (quedaron en el historial de git) y cargarlas en
+   Vercel → Environment Variables antes del próximo deploy. Nota: CRA las embebe en el
+   bundle público — son semi-públicas por diseño de EmailJS.
 2. `.env`, tokens, cookies, `localStorage` con datos sensibles: **nunca** commiteados.
 3. Sin `dangerouslySetInnerHTML` salvo sanitización explícita aprobada.
 4. `target="_blank"` siempre con `rel="noopener noreferrer"`.
@@ -156,11 +163,11 @@ Checklist mínimo antes de dar una sección por terminada:
 
 | Métrica | Tope |
 |---|---|
-| JS principal (gzip) | ≤ 150 kB *(baseline actual: 100.38 kB)* |
-| CSS (gzip) | ≤ 10 kB |
-| LCP móvil | ≤ 2.5 s |
-| CLS | < 0.1 |
-| TBT | ≤ 200 ms |
+| JS principal (gzip) | ≤ 150 kB *(actual: 115.23 kB)* |
+| CSS (gzip) | ≤ 10 kB *(actual: 3.50 kB)* |
+| LCP móvil | ≤ 2.5 s *(actual: mediana ~2376 ms; banda 2205–2507 por ruido de Lighthouse)* |
+| CLS | < 0.1 *(actual: 0.000)* |
+| TBT | ≤ 200 ms *(actual: ~27 ms)* |
 | Imagen hero/foto | ≤ 120 kB, con `width`/`height` |
 
 **Reglas**
@@ -174,7 +181,7 @@ Checklist mínimo antes de dar una sección por terminada:
 5. Imágenes: dimensiones explícitas, `loading="lazy"` fuera del fold, `srcset` cuando
    haya múltiples tamaños.
 6. Fonts: `font-display: swap`, preload del peso crítico, cero familias sin usar.
-   *(Hoy se carga Poppins y no se usa: eliminar.)*
+   *(Poppins/Google Fonts se eliminó en la Fase 1a.)*
 7. Medir antes y después de cada cambio de animación (Chrome DevTools → Performance).
 
 ---

@@ -1,0 +1,46 @@
+/* SectionHeading — kicker + título + regla con tick (DESIGN_SYSTEM.md §6.1) */
+
+.section-heading {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-12);
+}
+
+.section-heading__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-instrument);
+  text-align: left;
+}
+
+.section-heading__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-ink);
+  text-align: left;
+}
+
+/* Regla de 1px con tick inicial en signal (el detalle instrumental) */
+.section-heading__rule {
+  display: block;
+  height: 1px;
+  background: var(--color-line);
+  position: relative;
+  margin-top: var(--space-2);
+}
+
+.section-heading__rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -4px;
+  width: 2px;
+  height: 9px;
+  background: var(--color-signal);
+}

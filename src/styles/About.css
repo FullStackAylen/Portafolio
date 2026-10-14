@@ -1,22 +1,19 @@
-/* About.css */
+/* About — sección editorial sobre papel (DESIGN_SYSTEM.md).
+   Selectores acotados a .about; sin sombras de marco decorativas. */
 
 .about {
-  background-color: #f5f5f5; /* Fondo suave */
-  padding: 50px 20px; /* Espaciado general */
-  text-align: center;
-}
-
-h2 {
-  font-size: 2.5rem; /* Título más grande */
-  color: #333;
-  margin-bottom: 30px;
+  background: var(--color-canvas);
+  padding-block: var(--section-y);
+  /* Secciones offscreen no se maquillan hasta acercarse (ANIMATION_GUIDELINES §9-3) */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }
 
 .content-about {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Espacio entre imagen y texto */
+  gap: var(--space-8);
 }
 
 .profile-container {
@@ -24,64 +21,67 @@ h2 {
   justify-content: center;
 }
 
+/* Marco "de carta": regla fina de 1px, sin degradado ni sombra */
 .profile-frame-outer {
-  padding: 8px;
-  background: linear-gradient(135deg, #ddd, #f4f4f4); /* Degradado en el marco externo */
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: var(--space-2);
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
 }
 
 .profile-frame-inner {
-  padding: 12px;
-  background-color: white;
-  border-radius: 15px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
 }
 
 .profile-image {
-  width: 250px; /* Tamaño ajustado para un enfoque limpio */
+  display: block;
+  width: 260px;
   height: auto;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--radius-none);
+  transition: transform var(--motion-base) var(--ease-standard);
 }
 
+/* Hover discreto: sin escala grande ni sombra animada */
 .profile-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Efecto hover en la imagen */
+  transform: scale(1.02);
 }
 
-p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #555;
-  max-width: 600px;
-  margin: 0 auto;
+.about__text {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--measure);
 }
 
-blockquote {
-  margin-top: 20px;
+.about p {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--color-ink-muted); /* 5.67:1 — arregla el fallo de contraste previo */
+  text-align: left;
+}
+
+.about blockquote {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-signal);
   font-style: italic;
-  font-size: 1.2rem;
-  color: #777;
-  border-left: 4px solid #ddd;
-  padding-left: 16px;
+  font-size: var(--text-body);
+  color: var(--color-ink-muted);
+  text-align: left;
 }
 
 @media (min-width: 768px) {
   .content-about {
-    flex-direction: row; /* Cambia a formato de columna en pantallas grandes */
-    justify-content: center;
-    gap: 40px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--space-12);
   }
 
   .profile-image {
-    width: 300px; /* Imagen más grande en pantallas grandes */
-  }
-
-  p {
-    text-align: left;
-  }
-
-  blockquote {
-    text-align: left;
+    width: 300px;
   }
 }

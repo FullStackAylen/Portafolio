@@ -1,33 +1,27 @@
+/* Skills — pills de stack (DESIGN_SYSTEM.md §6.4): sin sombra individual,
+   fondo sunk, texto tinta. */
+
 .skills {
-    background-color: #fff;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .skills h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .skills ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .skills ul li {
-    margin: 10px 20px;
-    font-size: 1.2em;
-    background-color: #2a2a2a;
-    color: #fafafa;
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px #616060;
-  }
-  
+  background: var(--color-canvas);
+  padding-block: var(--section-y);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
+}
+
+.skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills li {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  background: var(--color-surface-sunk);
+  color: var(--color-ink);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+}

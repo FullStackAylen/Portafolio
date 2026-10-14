@@ -87,6 +87,11 @@ const reveal = {
 - **`once: true`** siempre: no re-animar al subir.
 - Los `h2` actuales usan `fadeInUp` CSS que se ejecuta **al montar**, no al entrar en
   viewport → el usuario nunca lo ve. Se reemplaza por `whileInView`.
+- ✅ **Implementado (Fase 5) y hibridado**: `src/components/Reveal.js` usa un **reveal
+  partido** — fade 120 ms + slide 420 ms (i20 → 0) — de modo que el contenido **nunca
+  queda invisible esperando la cascada**: la opacidad se resuelve rápido y el desplazamiento
+  continúa. Respeta `AGENTS.md` §9 ("el contenido nunca queda invisible esperando una
+  animación").
 
 ### 4.2 Parallax
 ```jsx
@@ -101,6 +106,8 @@ const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 ### 4.3 Stagger
 `delayChildren: 0.05`, `staggerChildren: 0.07`. Si el grupo supera 8 elementos, agrupar
 (pills por fila) para no pasar de 600 ms totales.
+- ✅ **Skills (Fase 5):** 15 pills ⇒ `staggerChildren: 0.035` × 15 = **525 ms** (≤ 600).
+  La cascada de 70 ms se reserva para grupos ≤ 8 elementos (hero, CTA).
 
 ### 4.4 Micro-interacciones
 - Botón: `whileTap={{ scale: 0.98 }}` a 140 ms.
@@ -110,12 +117,15 @@ const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
 ---
 
-## 5. Hero y lenguaje de movimiento — 3 propuestas *(pendientes de aprobación)*
+## 5. Hero y lenguaje de movimiento — selección aprobada
 
 > **Cambio de dirección (2026-10) — decisión del propietario** (ver
 > `PRODUCT_BRIEF.md` §1.1). El avión y la intro narrativa dejan de ser el elemento
 > protagonista y quedan **reemplazados** por las tres propuestas de abajo.
-> **Ninguna está aprobada todavía**: no se implementa ninguna sin visto bueno.
+>
+> ✅ **Selección (2026-10, aprobada): A "Campo" con detalles de B "Órbita"**
+> (hibridación aprobada), implementada en la **Fase 4a**. Las propuestas C y el avión
+> quedan descartados.
 
 ### 5.1 Las tres propuestas
 
@@ -147,9 +157,10 @@ const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
 | | |
 |---|---|
-| Propuesta elegida | ⬜ **pendiente del propietario** |
-| Recomendación y justificación | entregada en la conversación de esta sesión |
-| Primera implementación pequeña y verificable | `ROADMAP.md` → Fase 4a |
+| Propuesta elegida | ✅ **A "Campo" + detalles de B "Órbita"** (hibridación aprobada por el propietario) |
+| Recomendación y justificación | entregada en la conversación de la auditoría |
+| Implementación | ✅ Fase 4a (`Hero.js` + `ReactiveLayer.js`), medida con Lighthouse |
+| Pendiente | verificación en vivo (60 fps CPU 6×, teclado, reduce-motion) |
 
 ---
 

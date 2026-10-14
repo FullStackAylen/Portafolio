@@ -1,40 +1,26 @@
-.projects {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/* Projects — listado de casos de estudio. El look de la tarjeta vive en
+   CaseStudyCard.css (Fase 6); acá solo el grid del listado. */
 
-.projects h2 {
-  font-size: 2.2em;
-  margin-bottom: 30px;
+.projects {
+  background: var(--color-canvas);
+  padding-block: var(--section-y);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
 }
 
 .project-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
 }
 
-.project {
-  flex: 1 1 calc(33% - 20px);
-  background-color: white;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+/* El wrapper de Reveal es el hijo del grid: debe estirarse a la fila */
+.project-list > * {
+  height: 100%;
 }
 
-.project:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-.project h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.project p {
-  margin-bottom: 15px;
-  font-size: 1.1em;
+@media (min-width: 768px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

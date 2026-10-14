@@ -1,75 +1,28 @@
-// src/i18n.js
+// src/i18n.js — configuración. Las traducciones viven en src/locales/ (Fase 1b).
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import en from './locales/en.json';
+import es from './locales/es.json';
 
 i18n
-  .use(initReactI18next) 
+  .use(initReactI18next)
   .init({
     resources: {
-      en: {
-        translation: {
-          hero_kicker: "Portfolio",
-          hero_name_1: "Aylén",
-          hero_name_2: "Rodríguez",
-          hero_role: "Software Developer",
-          hero_desc: "Building software, exploring ideas, and turning complex problems into thoughtful digital experiences.",
-          hero_cta: "Scroll to explore",
-          about: "About Me",
-          presentation: "I am Aylén Rodríguez, a passionate software developer with experience in C#, .NET, ASP.NET, React, and more. I focus on creating clean, efficient, and scalable code.",
-          presentation_2: "I am constantly learning, allowing me to adapt to the needs of my environment.",
-          quote: '"The only way to do great work is to love what you do." - Steve Jobs',
-          skills: "Skills",
-          proyect: "Projects",
-          proyect_1: "This proyect use ADO.NET with MVC pattern in windows forms.",
-          proyect_2: "This proyect is the backend and frontend of ecommerce",
-          viewProj: "View Project",
-          contact: "Contact Me",
-          name: "Name",
-          mail: "Email",
-          msj: "Message",
-          yname: "Your Name",
-          ymail: "Your Email",
-          ymsj: "Your Message",
-          send: "Send",
-          en: "English",
-          es: "Spanish"
-        },
-      },
-      es: {
-        translation: {
-            hero_kicker: "Portafolio",
-            hero_name_1: "Aylén",
-            hero_name_2: "Rodríguez",
-            hero_role: "Desarrolladora de Software",
-            hero_desc: "Construyo software, exploro ideas y convierto problemas complejos en experiencias digitales cuidadas.",
-            hero_cta: "Desplázate para explorar",
-            about: "Acerca de mí",
-            presentation: "Soy Aylén Rodríguez, una apasionada desarrolladora de software con experiencia en C#, .NET, ASP.NET, React y más. Me enfoco en crear código limpio, eficiente y escalable.",
-            presentation_2: "Estoy en constantem aprendizaje, lo que me permite adaptarme a las necesidades de mi entorno.",
-            quote: '"La única forma de hacer un gran trabajo es amar lo que haces." - Steve Jobs',
-            skills: "Habilidades",
-            proyect: "Proyectos",
-            proyect_1: "Este proyecto utiliza ADO.NET con un patrón de diseño MVC en Windows Forms.",
-            proyect_2: "Este proyecto es el backend y frontend de un ecommerce de maquillaje.",
-            viewProj: "Ver Proyecto",
-            contact: "Contáctame",
-            name: "Nombre",
-            mail: "Correo electrónico",
-            msj: "Mensaje",
-            yname: "Tu Nombre",
-            ymail: "Tu Correo Electrónico",
-            ymsj: "Tu Mensaje",
-            send: "Enviar",
-            en: "Inglés",
-            es: "Español"
-        },
-      },
+      en: { translation: en },
+      es: { translation: es },
     },
-    lng: "en", 
-    fallbackLng: "en", 
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
   });
+
+// html lang siempre sincronizado con el idioma activo (AGENTS.md §7).
+const syncLang = (lng) => {
+  document.documentElement.lang = (lng || 'en').slice(0, 2);
+};
+i18n.on('languageChanged', syncLang);
+syncLang(i18n.language);
 
 export default i18n;

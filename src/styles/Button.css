@@ -1,0 +1,64 @@
+/* Button — variantes primary / ghost / quiet (DESIGN_SYSTEM.md §6.2).
+   El primario usa signal-ink (5.94:1 con texto blanco; el signal puro queda
+   en 3.68:1 y no alcanza AA para texto normal). */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-quick) var(--ease-standard),
+    border-color var(--motion-quick) var(--ease-standard),
+    color var(--motion-quick) var(--ease-standard);
+}
+
+.button--primary {
+  background-color: var(--color-signal-ink);
+  color: var(--color-surface);
+}
+
+.button--primary:hover {
+  background-color: var(--color-signal-deep);
+}
+
+.button--ghost {
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--color-ink);
+}
+
+.button--ghost:hover {
+  border-color: var(--color-ink);
+}
+
+/* Variante "quiet": texto con subrayado que se enciende en hover */
+.button--quiet {
+  background: transparent;
+  color: var(--color-instrument);
+  padding-inline: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.button--quiet:hover {
+  color: var(--color-signal-ink);
+  border-bottom-color: var(--color-signal);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

@@ -142,11 +142,14 @@ fórmula WCAG 2.1 (valores calculados, no estimados):
 | Texto | **Inter** | 400, 500, 600 | Máxima legibilidad en párrafo largo y UI |
 | Datos | **`ui-monospace, SFMono-Regular, Menlo, monospace`** | 400 | Sistema → **0 kB**, perfecta para códigos/etiquetas |
 
-**Auto-hospedado con `@fontsource`** (Fase 2). Prohibido `<link>` a Google Fonts:
-bloquea el render y expone datos del visitante.
+**Auto-hospedado (Fase 2 ✅)**: los `.woff2` variable están en `public/fonts/` y el
+`@font-face` + `<link rel="preload" crossorigin>` viven en `public/index.html`
+*(no en CSS: `css-loader` de CRA no resuelve `/public` desde CSS — probado; `@fontsource`
+se descartó)*. Prohibido `<link>` a Google Fonts: bloquea el render y expone datos del
+visitante.
 
-✅ *Problema actual a corregir:* se carga Poppins y el CSS pide Roboto/Arial — ninguna
-coincide. Se unifica todo en este sistema.
+✅ *(Resuelto: se eliminó Poppins/Google Fonts y se unificó todo en este sistema:
+Space Grotesk variable 300–700, Inter variable 100–900, `font-display: swap`.)*
 
 ### Escala fluida (base 16px)
 
@@ -228,9 +231,14 @@ Es la firma del concepto: aparece en **todas** las secciones, sin excepción.
 ### 6.2 `Button`
 | Variante | Estilo |
 |---|---|
-| `primary` | fondo `--color-signal`, texto `--color-surface`, radius `--radius-sm` |
+| `primary` | fondo **`--color-signal-ink`**, texto `--color-surface`, radius `--radius-sm` |
 | `ghost` | borde 1px `--color-line`, texto `--color-ink` |
 | `quiet` | texto solo, subrayado `--color-signal` en hover |
+
+> ⚠️ Corrección (2026-10): el primario **no** puede usar `--color-signal` como fondo con
+> texto `--color-surface`: el contraste es **3.68:1** y **falla AA** para texto normal.
+> Con `--color-signal-ink` da **5.94:1** ✅. (`--color-signal` queda para display ≥ 24px,
+> iconos y gráficos, según §2.2.)
 
 Estados: `default / hover / focus-visible / active / disabled`.
 `focus-visible`: `outline: 2px solid var(--color-focus-ring); outline-offset: 3px`.
@@ -253,22 +261,22 @@ Sin `alert()`. Placeholder nunca sustituye al label.
 
 ### 6.6 `Header` + `Nav`
 - Desktop: barra sticky con blur de fondo (`backdrop-filter` con fallback sólido).
-- Móvil: **botón hamburguesa real** (`lucide-react: Menu/X`) con `aria-expanded`,
+- Móvil: **botón hamburguesa real** (`react-icons`: `FaBars`/`FaTimes`) con `aria-expanded`,
   drawer animado, cierre con `Escape` y al elegir destino.
   *(Hoy el nav se apila verticalmente y no hay menú: bug de la auditoría.)*
 - Link activo marcado con `layoutId` (subrayado que viaja).
 
 ### 6.7 `LanguageSwitcher`
-`<button>` con `aria-haspopup` + `aria-expanded`, icono `Globe` de `lucide-react`,
-cierre al clic afuera y con `Escape`, idioma actual marcado con `aria-current`.
-*(Hoy es un icono SVG con `onClick`: inaccesible.)*
+`<button>` con el idioma actual marcado con `aria-current`, cierre del drawer con
+`Escape` y al elegir destino. *(Implementado en la Fase 3 con `react-icons`; sin
+`aria-haspopup` porque alterna EN↔ES directamente.)*
 
 ### 6.8 `Hero`
 Ocupa `100svh` con mínimo `560px`. Contenido: kicker, **tipografía display como
 protagonista** (nombre + rol; la palabra PORTFOLIO se mantiene como elemento display
 solo si la propuesta elegida lo incluye), línea de identidad, CTA de scroll, y como
-máximo **una** capa reactiva de fondo — una de las 3 propuestas de
-`ANIMATION_GUIDELINES.md` §5 (⏳ pendiente de aprobación).
+máximo **una** capa reactiva de fondo — ✅ propuesta **A "Campo" + detalles de B
+"Órbita"** aprobada e implementada en la Fase 4a (`ANIMATION_GUIDELINES.md` §5.3).
 
 Reglas: el `h1` con el nombre es el primer elemento del DOM; el hero **se lee completo
 sin animación y sin JS**; la capa viva es decorativa.
@@ -287,7 +295,9 @@ Contrato visual: **decorativa, nunca portadora de información.**
 
 ## 7. Iconografía
 
-- Set: **`lucide-react`** (ya instalado). 1.5px de trazo, estilo lineal coherente.
+- Set: **`react-icons`** (`react-icons/hi`/`fi`…, ya instalado). `lucide-react` se
+  desinstaló en la Fase 1a — no reinstalar sin aprobación (AGENTS §12). Estilo lineal
+  coherente, trazo fino.
 - Tamaño consistente: `18px` en UI, `24px` en headers de tarjeta.
 - Decorativos → `aria-hidden="true"`. Informativos → `role="img"` + `aria-label`.
 - Sin emojis como iconos. Sin iconos de múltiples sets mezclados.

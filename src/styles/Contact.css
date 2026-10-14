@@ -1,15 +1,16 @@
-.contact {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 10px;
-  padding: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/* Contact — tarjeta de formulario sobre superficie (DESIGN_SYSTEM.md).
+   Los estados de envío y los labels asociados llegan en la Fase 3. */
 
-.contact h2 {
-  font-size: 2em;
-  margin-bottom: 30px;
+.contact {
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-1);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }
 
 .contact form {
@@ -18,22 +19,57 @@
 }
 
 .contact form label {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-.textarea{
-  resize: none;
-  
-}
-.contact form input,
-.contact form textarea {
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 1em;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
 }
 
-.contact form button {
+.contact form input,
+.contact form textarea {
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  background: var(--color-surface-sunk);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact form .button {
   align-self: flex-end;
+}
+
+/* Honeypot antispam: invisible para personas, no enfocable (AGENTS.md §6.6) */
+.contact__hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Feedback de envío con aria-live — nunca alert() (AGENTS.md §7) */
+.contact__status {
+  min-height: 1.5em;
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  text-align: right;
+}
+
+.contact__status--success {
+  color: var(--color-success);
+}
+
+.contact__status--error {
+  color: var(--color-danger);
 }

@@ -43,10 +43,17 @@
   margin-bottom: -0.06em;
 }
 
+/* Reveal partido en dos animaciones (LCP protegido, §5.2-4): la opacidad llega
+   a 1 en 120 ms —el paint cuenta desde el inicio del reveal— mientras la
+   máscara-slide continúa 420 ms. El ojo ve el mismo viaje; el LCP no espera. */
 .hero__line-inner {
   display: block;
-  animation: hero-line-in var(--motion-emphasis) var(--ease-out) backwards;
-  animation-delay: calc(var(--hero-i, 0) * var(--motion-stagger));
+  animation:
+    hero-line-fade 120ms var(--ease-out) backwards,
+    hero-line-slide var(--motion-emphasis) var(--ease-out) backwards;
+  animation-delay:
+    calc(var(--hero-i, 0) * var(--motion-stagger)),
+    calc(var(--hero-i, 0) * var(--motion-stagger));
 }
 
 /* --- Kicker: metadata en mono --- */
@@ -107,9 +114,22 @@
   max-width: 42ch;
 }
 
+/* --- Columna editorial: el dato está presente desde el frame 1 ---
+   La cascada por máscara queda SOLO para la tipografía protagonista
+   (kicker, nombre, CTA). El rol y la desc no esperan animación: son el
+   ancla de datos de la composición y protegen el LCP (§5.2-4). */
+.hero__role .hero__line-inner,
+.hero__desc .hero__line-inner {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
 /* --- CTA de scroll --- */
 .hero__cta {
-  --hero-i: 6;
+  /* Comparte beat con la 2ª línea del nombre: la cascada total baja de 840 a
+     700 ms, liberando la ventana del LCP (presupuesto AGENTS.md §8). */
+  --hero-i: 4;
   justify-self: start;
   display: inline-flex;
   align-items: center;
@@ -186,15 +206,24 @@
   }
 }
 
-@keyframes hero-line-in {
-  from {
-    transform: translateY(105%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* --- Entrada salteable (§5.2-2): el primer gesto lleva todo al estado final --- */
+.hero--intro-done .hero__line-inner,
+.hero--intro-done .hero__layer {
+  animation: none;
+}
+
+.hero--intro-done .hero__layer {
+  opacity: 1;
+}
+
+@keyframes hero-line-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-line-slide {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
 }
 
 @keyframes hero-layer-in {

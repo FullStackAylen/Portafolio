@@ -1,41 +1,55 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import '../styles/About.css';
-import Photo from '../Assets/MePhoto.jpeg'
+import Photo from '../Assets/MePhoto.jpeg';
 import { useTranslation } from 'react-i18next';
+import SectionHeading from './SectionHeading';
+import Reveal from './Reveal';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 function About() {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
+  const reduced = usePrefersReducedMotion();
+  const frameRef = useRef(null);
+
+  // Parallax contenido (§4.2): ±12 px sobre el marco — ≤10% del elemento,
+  // solo transform, y desactivado por completo con reduce-motion.
+  const { scrollYProgress } = useScroll({
+    target: frameRef,
+    offset: ['start end', 'end start'],
+  });
+  const frameY = useTransform(scrollYProgress, [0, 1], [-12, 12]);
+
   return (
-    <motion.section
-      id="about"
-      className="about"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <h2>{t('about')}</h2>
-      <div className='content-about'>      
-        <div className="profile-container">
-          <div className="profile-frame-outer">
+    <section id="about" className="about">
+      <SectionHeading kickerKey="kicker_about" titleKey="about" />
+      <Reveal className="content-about">
+        <div className="profile-container" ref={frameRef}>
+          <motion.div
+            className="profile-frame-outer"
+            style={reduced ? undefined : { y: frameY }}
+          >
             <div className="profile-frame-inner">
-              <img className='profile-image' src={Photo} alt="Logo" />
+              <img
+                className="profile-image"
+                src={Photo}
+                alt="Retrato de Aylén Rodríguez"
+                loading="lazy"
+              />
             </div>
-          </div>
+          </motion.div>
         </div>
-        <div>
-        <p>
-           {t('presentation')}<br />
-           {t('presentation_2')}
-  
-        </p> 
-        <blockquote>
-          {t('quote')}
-        </blockquote>
-        
+        <div className="about__text">
+          <p>
+            {t('presentation')}<br />
+            {t('presentation_2')}
+          </p>
+          <blockquote>
+            {t('quote')}
+          </blockquote>
         </div>
-      </div>
-    </motion.section>
+      </Reveal>
+    </section>
   );
 }
 
