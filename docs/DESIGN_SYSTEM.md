@@ -45,31 +45,36 @@ demo), y cualquier animación que oculte contenido mientras ocurre.
 
 ## 2. Tokens de color
 
-Archivo objetivo: `src/styles/tokens.css`. **Ningún color hardcodeado fuera de tokens.**
+Archivo: `src/styles/tokens.css`. **Ningún color hardcodeado fuera de tokens.**
+
+> **Dirección vigente (N1, 2026-10-14): tema oscuro completo estilo Netflix**
+> (decisión del propietario, ROADMAP). La paleta sobre papel de la dirección anterior
+> quedó reemplazada; los ratios se recalcularon sobre `--color-canvas: #141414`.
 
 ```css
 :root {
   /* Superficies */
-  --color-canvas:      #F4F2ED;  /* página */
-  --color-surface:     #FFFFFF;  /* tarjetas, formulario */
-  --color-surface-sunk:#E9E6DF;  /* bandas alternas, fondos de inputs */
+  --color-canvas:       #141414;  /* página (Netflix) */
+  --color-surface:      #1F1F1F;  /* tarjetas, formulario, drawer */
+  --color-surface-sunk: #0B0B0B;  /* fondos de inputs, pills, covers */
 
   /* Tinta */
-  --color-ink:         #14161A;  /* títulos y texto principal  16.1:1 */
-  --color-ink-muted:    #5A6068; /* texto secundario            5.7:1 */
-  --color-line:        #D6D2C8;  /* reglas, bordes, divisores   1.4:1 (no-texto) */
+  --color-ink:       #FFFFFF;     /* títulos y texto principal  18.4:1 */
+  --color-ink-muted: #B3B3B3;     /* texto secundario            8.8:1 */
+  --color-line:      #333333;     /* reglas y bordes (no-texto) */
 
-  /* Señal — un solo acento */
-  --color-signal:      #E4572E;  /* gráficos, subrayados, display grande  3.3:1 */
-  --color-signal-ink:  #B33A16;  /* acento COMO TEXTO                      5.3:1 */
+  /* Señal — el rojo Netflix */
+  --color-signal:      #E50914;   /* UI, display grande, bordes   3.8:1 */
+  --color-signal-ink:  #FF4D4D;   /* acento COMO TEXTO            5.6:1 */
+  --color-signal-deep: #B20710;   /* hover de primarios */
 
   /* Instrumento — datos y enlaces */
-  --color-instrument:  #1F4E5F;  /* links, datos, coordenadas    8.1:1 */
+  --color-instrument:  #8AB4D8;   /* kickers, metadata            8.4:1 */
 
   /* Estados */
-  --color-success:     #1B6B45;
-  --color-danger:      #A3231C;
-  --color-focus-ring:  #1F4E5F;
+  --color-success:     #46D369;   /* 9.5:1 */
+  --color-danger:      #FF6B6B;   /* 6.6:1 */
+  --color-focus-ring:  #FFFFFF;   /* 17.9:1 — visible sobre todo */
 }
 ```
 
@@ -86,46 +91,27 @@ nuevo. Los ratios listados arriba son los de cada token sobre `--color-canvas`.
 
 | Token | Uso permitido | Uso prohibido |
 |---|---|---|
-| `--color-signal` | iconos, subrayados, barras de progreso, texto ≥ 24px bold | texto corrido, fondos grandes |
-| `--color-signal-ink` | texto de acento, links en hover | — |
-| `--color-instrument` | enlaces, valores numéricos, etiquetas de datos | — |
-| `--color-ink-muted` | texto secundario (≥ 16px) | texto < 14px (queda en límite AA) |
+| `--color-signal` | fondos de botón (con texto ink), iconos, bordes, display ≥ 24px | texto corrido (< 24px) |
+| `--color-signal-ink` | texto de acento, links en hover | fondos grandes |
+| `--color-instrument` | kickers, etiquetas de datos, metadata | — |
+| `--color-ink-muted` | texto secundario (≥ 16px) | — |
 
+- **Blanco sobre `--color-signal` (botones primarios): 4.79:1 ✅** — el rojo puro con
+  texto blanco pasa AA para texto normal.
 - **Nunca** color puro de marca sobre otro color de marca (contraste no garantizado).
 - **Nunca** información solo por color: siempre acompaña icono, texto o forma.
-- **Dark mode completo:** fuera de alcance actual. Un **hero o banda sobre tinta** no es
-  dark mode: es una superficie del sistema y usa los tokens de §2.1.
 
-### 2.1 Evaluación de la paleta para la nueva dirección
+### 2.1 Ratios verificados (tema oscuro)
 
-La dirección nueva agrega **fondos vivos y una superficie oscura posible** (geometría
-flotante / campo generativo). Se recalculó toda la paleta sobre **ambos fondos** con la
-fórmula WCAG 2.1 (valores calculados, no estimados):
-
-| Texto / acento | Sobre papel `#F4F2ED` | Sobre tinta `#14161A` |
+| Texto / acento | Sobre canvas `#141414` | Sobre surface `#1F1F1F` |
 |---|---|---|
-| `--color-ink` `#14161A` | **16.19:1** ✅ | — |
-| `--color-ink-muted` `#5A6068` | **5.67:1** ✅ | **2.85:1** ❌ |
-| `--color-signal-ink` `#B33A16` | **5.31:1** ✅ | **3.05:1** ❌ |
-| `--color-signal` `#E4572E` | **3.29:1** ⚠️ solo UI / texto ≥ 24px | **4.92:1** ✅ texto normal |
-| `--color-instrument` `#1F4E5F` | **8.11:1** ✅ | **2.00:1** ❌ |
-| `--color-line` `#D6D2C8` | no-texto | **12.00:1** ✅ |
-| papel `#F4F2ED` | — | **16.19:1** ✅ |
-
-**Conclusión: la paleta se conserva, pero no es agnóstica al fondo.**
-
-1. **Sobre papel** el acento *como texto* es `--color-signal-ink` (5.31:1); `--color-signal`
-   queda para display ≥ 24px, iconos y gráficos (3.29:1 ≥ 3:1).
-2. **Sobre tinta la regla se invierte**: `--color-signal` **sí** sirve como texto (4.92:1)
-   y `--color-signal-ink` queda **prohibido** (3.05:1).
-3. `--color-instrument` **no funciona sobre tinta** (2.00:1, ni siquiera para UI). Si una
-   propuesta de hero usa fondo tinta, hacen falta 3 tokens nuevos (solo ahí):
-
-```css
---color-on-ink-text:      #F4F2ED;  /* 16.19:1 */
---color-on-ink-muted:     #8A9099;  /*  5.63:1 */
---color-instrument-light: #6FA8B8;  /*  6.87:1 reemplaza a instrument sobre tinta */
-```
+| `--color-ink` `#FFFFFF` | **18.4:1** ✅ | **16.6:1** ✅ |
+| `--color-ink-muted` `#B3B3B3` | **8.8:1** ✅ | **7.9:1** ✅ |
+| `--color-signal-ink` `#FF4D4D` | **5.6:1** ✅ | **5.1:1** ✅ |
+| `--color-signal` `#E50914` | **3.8:1** ⚠️ solo UI / texto ≥ 24px | **3.4:1** ⚠️ ídem |
+| `--color-instrument` `#8AB4D8` | **8.4:1** ✅ | **7.6:1** ✅ |
+| `--color-line` `#333333` | no-texto | no-texto |
+| ink `#FFFFFF` sobre signal `#E50914` | **4.8:1** ✅ (botones) | — |
 
 4. **El contraste se mide contra el peor caso**: si la capa viva va detrás de texto, el
    ratio se calcula con el pixel de fondo más oscuro/claro que puede tocar el texto.
@@ -134,22 +120,23 @@ fórmula WCAG 2.1 (valores calculados, no estimados):
 
 ## 3. Tipografía
 
-**Sistema de 3 voces, 0 pesos muertos:**
+**Sistema de 3 voces, 0 pesos muertos** (actualizado en N1):
 
 | Rol | Fuente | Pesos | Por qué |
 |---|---|---|---|
-| Display | **Space Grotesk** | 500, 700 | Técnica, con carácter, sostiene títulos grandes |
+| Display | **Bebas Neue** (OFL) | **solo 400** | Condensada de impacto, evoca títulos de catálogo; sustituye a Space Grotesk y a la propietaria Netflix Sans |
 | Texto | **Inter** | 400, 500, 600 | Máxima legibilidad en párrafo largo y UI |
 | Datos | **`ui-monospace, SFMono-Regular, Menlo, monospace`** | 400 | Sistema → **0 kB**, perfecta para códigos/etiquetas |
 
-**Auto-hospedado (Fase 2 ✅)**: los `.woff2` variable están en `public/fonts/` y el
+⚠️ **Bebas Neue solo tiene el peso 400**: nunca pedir `font-weight` alto en display
+(el navegador sintetiza un falso bold). Bebas es cap-height: en tamaños chicos se ve
+más pequeña — compensar con `font-size` ~30 % mayor que con Inter.
+
+**Auto-hospedado (Fase 2 ✅, actualizado N1)**: los `.woff2` están en `public/fonts/` y el
 `@font-face` + `<link rel="preload" crossorigin>` viven en `public/index.html`
 *(no en CSS: `css-loader` de CRA no resuelve `/public` desde CSS — probado; `@fontsource`
 se descartó)*. Prohibido `<link>` a Google Fonts: bloquea el render y expone datos del
-visitante.
-
-✅ *(Resuelto: se eliminó Poppins/Google Fonts y se unificó todo en este sistema:
-Space Grotesk variable 300–700, Inter variable 100–900, `font-display: swap`.)*
+visitante. Space Grotesk se eliminó en N1 (cero familias sin usar).
 
 ### Escala fluida (base 16px)
 

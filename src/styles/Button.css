@@ -1,6 +1,6 @@
 /* Button — variantes primary / ghost / quiet (DESIGN_SYSTEM.md §6.2).
-   El primario usa signal-ink (5.94:1 con texto blanco; el signal puro queda
-   en 3.68:1 y no alcanza AA para texto normal). */
+   N1 (tema oscuro): el primario usa signal (#E50914) con texto blanco
+   (4.79:1 ✓ AA); signal-ink quedó como rojo claro para TEXTO sobre oscuro. */
 
 .button {
   display: inline-flex;
@@ -21,8 +21,8 @@
 }
 
 .button--primary {
-  background-color: var(--color-signal-ink);
-  color: var(--color-surface);
+  background-color: var(--color-signal);
+  color: var(--color-ink);       /* blanco: 4.79:1 sobre signal */
 }
 
 .button--primary:hover {

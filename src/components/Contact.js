@@ -56,6 +56,11 @@ function Contact() {
   return (
     <section id="contact" className="contact">
       <SectionHeading kickerKey="kicker_contact" titleKey="contact" />
+      {/* Propósito doble del contacto (N5, decisión del propietario):
+          oportunidades laborales y colaboraciones de proyecto. */}
+      <Reveal as="p" className="contact__intro">
+        {t('contact_intro')}
+      </Reveal>
       <Reveal as="form" onSubmit={sendEmail}>
         <label htmlFor="contact-name">{t('name')}</label>
         <input

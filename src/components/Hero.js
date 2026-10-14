@@ -4,13 +4,14 @@ import ReactiveLayer from './ReactiveLayer';
 import '../styles/Hero.css';
 
 /**
- * Hero — "Precisión viva": tipografía protagonista sobre papel + una única capa
- * reactiva decorativa (ReactiveLayer). Aprobado en ROADMAP Fase 4a.
+ * Hero — dirección "Netflix" (N2): tipografía protagonista + retrato + una única
+ * capa reactiva decorativa (ReactiveLayer). Reemplaza la composición anterior.
  * El contenido se lee completo sin JS y sin animación; la capa viva es aria-hidden.
+ * `paused` mantiene la cascada en pausa mientras corre la intro ta-dum (App.js).
  * Entrada salteable (ANIMATION_GUIDELINES.md §5.2-2): el primer gesto del usuario
  * (clic, tecla o scroll) lleva la composición a su estado final al instante.
  */
-function Hero() {
+function Hero({ paused = false }) {
   const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [introDone, setIntroDone] = useState(false);
@@ -31,7 +32,13 @@ function Hero() {
 
   return (
     <section
-      className={introDone ? 'hero hero--intro-done' : 'hero'}
+      className={[
+        'hero',
+        paused ? 'hero--paused' : '',
+        introDone ? 'hero--intro-done' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       aria-labelledby="hero-title"
       id="hero"
       ref={sectionRef}
@@ -44,6 +51,24 @@ function Hero() {
             <span className="hero__line-inner">{t('hero_kicker')}</span>
           </span>
         </p>
+
+        {/* Retrato: estado draft honesto (AGENTS.md §3). El propietario todavía
+            no entregó la foto; el marco muestra un monograma con sus iniciales
+            reales y la nota pendiente. Al recibir la foto se reemplaza el
+            bloque `hero__photo-pending` por un <img> con width/height,
+            alt={t('hero_photo_alt')} y ≤120 kB (presupuesto AGENTS.md §8). */}
+        <figure className="hero__photo">
+          <span className="hero__line">
+            <span className="hero__line-inner hero__photo-inner">
+              <span className="hero__photo-pending" aria-hidden="true">
+                AR
+              </span>
+            </span>
+          </span>
+          <figcaption className="hero__photo-caption">
+            {t('hero_photo_pending')}
+          </figcaption>
+        </figure>
 
         {/* Único h1 de la página (el logo del header pasó a ser texto). */}
         <h1 className="hero__name" id="hero-title">

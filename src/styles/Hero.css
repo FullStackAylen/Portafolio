@@ -1,6 +1,6 @@
-/* Hero — composición asimétrica sobre papel (concepto "Precisión viva").
-   Solo selectores de clase .hero__*: App.css redefine `p`, `h2` y `a` a nivel
-   global, así que ningún elemento crudo se estiliza desde acá. */
+/* Hero — dirección "Netflix" (N2): tipografía protagonista + retrato + capa
+   reactiva. Solo selectores de clase .hero__*: App.css redefine `p`, `h2` y `a`
+   a nivel global, así que ningún elemento crudo se estiliza desde acá. */
 
 .hero {
   position: relative;
@@ -33,6 +33,45 @@
   margin-inline: auto;
   display: grid;
   gap: var(--space-6);
+}
+
+/* --- Retrato (N2): marco 3:4 con monograma mientras la foto está pendiente.
+    La figura entra con el mismo beat que el bloque de nombre (--hero-i: 3).
+    Al recibir la foto real se reemplaza .hero__photo-pending por <img>
+    (mismas reglas de dimensiones explícitas, AGENTS.md §8). --- */
+.hero__photo {
+  --hero-i: 3;
+  margin: 0;
+  justify-self: start;
+  width: min(260px, 62vw);
+}
+
+.hero__photo-inner {
+  display: block;
+}
+
+.hero__photo-pending {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 3rem + 6vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-signal);      /* iniciales: display grande (3.84:1 ≥ 3:1) */
+  box-shadow: var(--shadow-2);
+}
+
+.hero__photo-caption {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);   /* 8.79:1 sobre canvas */
 }
 
 /* --- Reveal por máscara: cada línea entra desde abajo, escalonada --- */
@@ -73,7 +112,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-display);
-  font-weight: 700;
+  font-weight: 400;               /* Bebas Neue solo tiene 400 (N1) */
   line-height: 0.94;
   letter-spacing: -0.03em;
   color: var(--color-ink);
@@ -109,7 +148,7 @@
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: 1.65;
-  color: var(--color-ink-muted);  /* 5.67:1 sobre papel */
+  color: var(--color-ink-muted);  /* 8.79:1 sobre canvas */
   text-align: left;
   max-width: 42ch;
 }
@@ -146,7 +185,7 @@
 }
 
 .hero__cta:hover {
-  color: var(--color-signal-ink);   /* 5.31:1 sobre papel */
+  color: var(--color-signal-ink);   /* 5.64:1 sobre canvas */
   border-color: var(--color-signal);
 }
 
@@ -165,14 +204,16 @@
   transform: translateY(2px);
 }
 
-/* --- Composición asimétrica en desktop (≥900px) --- */
+/* --- Composición asimétrica en desktop (≥900px): retrato a la derecha,
+    tipografía protagonista a la izquierda (billboard tipo Netflix) --- */
 @media (min-width: 900px) {
   .hero__content {
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
     grid-template-areas:
       "kicker kicker"
-      "name   aside"
-      "cta    aside";
+      "name   photo"
+      "aside  photo"
+      "cta    cta";
     column-gap: var(--space-16);
     align-items: end;
   }
@@ -181,12 +222,27 @@
   .hero__name { grid-area: name; }
   .hero__cta { grid-area: cta; }
 
+  .hero__photo {
+    grid-area: photo;
+    align-self: center;
+    justify-self: end;
+    width: min(320px, 100%);
+  }
+
   .hero__aside {
-    grid-area: aside;
     align-self: end;
     border-left: 1px solid var(--color-line);
     padding-left: var(--space-6);
   }
+}
+
+/* --- Intro ta-dum activa (N2): la cascada del hero queda en pausa y arranca
+    desde el beat 0 cuando la intro se desmonta. Es pausa, no reinicio: si el
+    usuario saltea la intro, el primer gesto además dispara --intro-done y el
+    contenido queda en su estado final al instante. --- */
+.hero--paused .hero__line-inner,
+.hero--paused .hero__layer {
+  animation-play-state: paused;
 }
 
 /* --- Movimiento reducido: composición final estática, sin capa animada --- */

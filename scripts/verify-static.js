@@ -54,7 +54,7 @@ check('CSS gz ≤ 10 kB', css / 1024 <= 10, `${(css / 1024).toFixed(2)} kB`);
 
 // 5. Fuentes vendidas presentes
 const fonts = fs.readdirSync(path.join(__dirname, '../public/fonts'));
-check('fonts vendored', fonts.includes('Inter-latin.woff2') && fonts.includes('SpaceGrotesk-latin.woff2'), fonts.join(', '));
+check('fonts vendored', fonts.includes('Inter-latin.woff2') && fonts.includes('BebasNeue-latin.woff2'), fonts.join(', '));
 
 // 6. Sin selectores de elemento globales en CSS de componente
 const cssFiles = fs

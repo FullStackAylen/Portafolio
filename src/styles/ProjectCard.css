@@ -1,0 +1,107 @@
+/* ProjectCard — card tipo Netflix (N4): cover arriba, cuerpo abajo sobre
+   surface. La card entera es clickeable por el pseudo-elemento del link. */
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard);
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--color-signal);
+  box-shadow: var(--shadow-2);
+}
+
+.project-card--draft {
+  border-style: dashed;
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  flex: 1;
+}
+
+.project-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;               /* Bebas Neue solo tiene 400 (N1) */
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.project-card__desc {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}
+
+/* Meta real del snapshot de GitHub (lenguaje · stars · último push) */
+.project-card__meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-instrument);  /* 8.43:1 sobre surface */
+}
+
+.project-card__note {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--color-ink-muted);
+}
+
+.project-card__fields {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.project-card__fields dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-instrument);
+}
+
+.project-card__fields dd {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+/* Link estirado: el pseudo cubre toda la card; el link real queda enfocable */
+.project-card__link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.project-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.project-card__link:focus-visible::after {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -4px;
+}

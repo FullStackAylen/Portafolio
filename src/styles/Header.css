@@ -25,10 +25,10 @@
 .logo {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.6rem;              /* Bebas es cap-height: escala ~30% más pequeña */
+  font-weight: 400;
   color: var(--color-ink);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.06em;
 }
 
 /* Toggle del menú móvil (oculto en desktop) */

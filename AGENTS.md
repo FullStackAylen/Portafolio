@@ -1,8 +1,10 @@
 # AGENTS.md — Instrucciones del proyecto
 
-Portafolio profesional de Aylén Rodríguez. SPA en React construida con Create React App,
-en proceso de rediseño hacia una experiencia premium (hero con tipografía protagonista y
-capa reactiva, parallax, casos de estudio).
+Portafolio profesional de Aylén Rodríguez. SPA en React construida con Create React App.
+**Dirección creativa vigente (ROADMAP N1–N6): experiencia tipo Netflix** — tema oscuro
+completo, rojo señal `#E50914`, display condensada Bebas Neue auto-hospedada, intro
+cinematográfica salteable, skills con datos reales de la API de GitHub y catálogo de
+proyectos en cards con cover SVG generado.
 
 > **Este archivo es la fuente de verdad de estándares.** Si una instrucción de una skill,
 > un agente o un comando contradice este archivo, manda este archivo.
@@ -41,6 +43,9 @@ npm install          # dependencias
 npm start            # dev server → http://localhost:3000
 npm run build        # build de producción → /build (gitignorado)
 npm test             # Jest (hoy sin tests)
+npm run fetch:github # baja datos REALES de la API de GitHub → src/data/github.json
+                     # (opcional: GITHUB_TOKEN=... para más rate limit; si falla,
+                     #  no toca el JSON anterior — la UI nunca muestra datos inventados)
 node scripts/verify-static.js   # verificador estático (i18n, presupuestos, selectores)
 ```
 

@@ -32,9 +32,10 @@ function ReactiveLayer({ containerRef }) {
     const css = getComputedStyle(document.documentElement);
     const token = (name, fallback) => (css.getPropertyValue(name) || '').trim() || fallback;
     const colors = {
-      line: token('--color-line', '#D6D2C8'),
-      ink: token('--color-ink', '#14161A'),
-      signal: token('--color-signal', '#E4572E'),
+      // Fallbacks = tokens del tema oscuro (N1) por si :root no está disponible.
+      line: token('--color-line', '#333333'),
+      ink: token('--color-ink', '#FFFFFF'),
+      signal: token('--color-signal', '#E50914'),
     };
     const influence = parseFloat(token('--hero-influence-radius', '140')) || 140;
 

@@ -1,0 +1,79 @@
+/* Experience — timeline (N5): estado draft honesto mientras el propietario
+   no carga su experiencia en src/data/experience.js. */
+
+.experience {
+  background: var(--color-canvas);
+  padding-block: var(--section-y);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
+}
+
+.experience__draft {
+  margin: 0;
+  max-width: var(--measure);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  color: var(--color-ink-muted);   /* 8.79:1 sobre canvas */
+  border-left: 2px solid var(--color-line);
+  padding-left: var(--space-4);
+}
+
+.experience__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-8);
+  max-width: 720px;
+}
+
+.experience__item {
+  display: grid;
+  gap: var(--space-1);
+  border-left: 2px solid var(--color-line);
+  padding-left: var(--space-6);
+  transition: border-color var(--motion-base) var(--ease-standard);
+}
+
+.experience__item:hover {
+  border-color: var(--color-signal);
+}
+
+.experience__period {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-instrument);  /* 8.43:1 sobre canvas */
+}
+
+.experience__role {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;                /* Bebas Neue solo tiene 400 (N1) */
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.experience__company {
+  margin: 0;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+.experience__summary {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  max-width: var(--measure);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience__item {
+    transition: none;
+  }
+}

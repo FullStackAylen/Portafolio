@@ -1,0 +1,83 @@
+/* Intro "ta-dum" (N2). Timeline (todo transform/opacity):
+   0–150ms   barras rojas barren desde arriba/abajo (scaleY)
+   150–850ms "PORTFOLIO" en Bebas rojo aparece (opacity + scale)
+   850–1500ms las barras se retiran; texto en reposo
+   1500–1980ms la capa completa se funde y escala como si pasara la cámara
+   El componente se desmonta a los 2000 ms (o antes con cualquier gesto). */
+
+.netflix-intro {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-intro);
+  display: grid;
+  place-items: center;
+  background: var(--color-canvas);
+  pointer-events: none;              /* nunca bloquea scroll ni clics */
+  animation: intro-fade var(--motion-base) var(--ease-standard) 1500ms forwards;
+}
+
+.netflix-intro__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18vw;
+  max-width: 220px;
+  background: var(--color-signal);
+  animation: intro-bar 850ms var(--ease-out) both;
+}
+
+.netflix-intro__bar--left {
+  left: 0;
+  transform-origin: top;
+  animation-name: intro-bar-left;
+}
+
+.netflix-intro__bar--right {
+  right: 0;
+  transform-origin: bottom;
+  animation-name: intro-bar-right;
+  animation-delay: 80ms;
+}
+
+.netflix-intro__text {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(4rem, 14vw, 12rem);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-signal);       /* 3.84:1 → texto grande (≥3:1) + decorativo */
+  animation: intro-text 700ms var(--ease-out) 150ms both;
+}
+
+@keyframes intro-bar-left {
+  from { transform: scaleY(0); }
+  60%  { transform: scaleY(1); }
+  to   { transform: scaleY(0); }
+}
+
+@keyframes intro-bar-right {
+  from { transform: scaleY(0); }
+  60%  { transform: scaleY(1); }
+  to   { transform: scaleY(0); }
+}
+
+@keyframes intro-text {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes intro-fade {
+  from { opacity: 1; }
+  to   { opacity: 0; visibility: hidden; }
+}
+
+/* Movimiento reducido: App.js no monta la intro; este bloque es red de
+   seguridad por si el componente llegara a montarse igual. */
+@media (prefers-reduced-motion: reduce) {
+  .netflix-intro {
+    display: none;
+  }
+}

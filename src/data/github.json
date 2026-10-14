@@ -1,0 +1,94 @@
+{
+  "fetchedAt": "2026-10-14T21:25:52.571Z",
+  "profile": {
+    "login": "FullStackAylen",
+    "name": "Aylen Rodriguez",
+    "bio": "💻 Full Stack Dev | Amante del código limpio y la UI clara. Técnica en sistemas y estudiante de Ing. en Sistemas. Siempre aprendiendo.",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/180685166?v=4",
+    "createdAt": "2024-09-06T16:29:57Z",
+    "followers": 3,
+    "publicRepos": 9,
+    "profileUrl": "https://github.com/FullStackAylen"
+  },
+  "totals": {
+    "commitsLastYear": 7,
+    "stars": 3
+  },
+  "languages": [
+    {
+      "name": "C#",
+      "bytes": 190807,
+      "share": 0.4995614597760434
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 126329,
+      "share": 0.3307483459833643
+    },
+    {
+      "name": "CSS",
+      "bytes": 44233,
+      "share": 0.11580865508222302
+    },
+    {
+      "name": "HTML",
+      "bytes": 16309,
+      "share": 0.04269941798512367
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 4271,
+      "share": 0.011182121173245643
+    }
+  ],
+  "repos": [
+    {
+      "name": "Portafolio",
+      "description": "Protafolio profesional",
+      "language": "JavaScript",
+      "stars": 1,
+      "pushedAt": "2026-10-14T20:08:44Z",
+      "url": "https://github.com/FullStackAylen/Portafolio"
+    },
+    {
+      "name": "Photographs",
+      "description": "Personal photographs",
+      "language": "CSS",
+      "stars": 0,
+      "pushedAt": "2025-05-09T20:24:37Z",
+      "url": "https://github.com/FullStackAylen/Photographs"
+    },
+    {
+      "name": "Farmacia_EF",
+      "description": "ABM de farmacia con windows forms y entity framework siguiendo un patron de diseño MVC ",
+      "language": "C#",
+      "stars": 1,
+      "pushedAt": "2025-05-09T20:22:26Z",
+      "url": "https://github.com/FullStackAylen/Farmacia_EF"
+    },
+    {
+      "name": "TheCrowMakeup",
+      "description": "Aplicacion ecommerce, pagina de administracion y pagina de ventas con un backend hecho en api.net core",
+      "language": "C#",
+      "stars": 0,
+      "pushedAt": "2025-05-09T20:19:32Z",
+      "url": "https://github.com/FullStackAylen/TheCrowMakeup"
+    },
+    {
+      "name": "Calculadora.github.io",
+      "description": "Proyecto basico de practica con html, css y js de una calculadora.",
+      "language": "JavaScript",
+      "stars": 0,
+      "pushedAt": "2025-05-04T17:27:13Z",
+      "url": "https://github.com/FullStackAylen/Calculadora.github.io"
+    },
+    {
+      "name": "To-Do.github.io",
+      "description": "Aplicacion basica de To-Do-List con HTML, CSS y Typescript",
+      "language": "HTML",
+      "stars": 0,
+      "pushedAt": "2025-05-04T17:26:23Z",
+      "url": "https://github.com/FullStackAylen/To-Do.github.io"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-/* About — sección editorial sobre papel (DESIGN_SYSTEM.md).
-   Selectores acotados a .about; sin sombras de marco decorativas. */
+/* About — sección editorial (dirección Netflix, N6). Selectores acotados a
+   .about; sin sombras de marco decorativas. */
 
 .about {
   background: var(--color-canvas);
@@ -59,7 +59,7 @@
   margin: 0;
   font-size: var(--text-body);
   line-height: 1.65;
-  color: var(--color-ink-muted); /* 5.67:1 — arregla el fallo de contraste previo */
+  color: var(--color-ink-muted); /* 8.79:1 sobre canvas */
   text-align: left;
 }
 

@@ -33,7 +33,7 @@ function About() {
               <img
                 className="profile-image"
                 src={Photo}
-                alt="Retrato de Aylén Rodríguez"
+                alt={t('photo_alt')}
                 loading="lazy"
               />
             </div>

@@ -1,14 +1,126 @@
-/* Skills — pills de stack (DESIGN_SYSTEM.md §6.4): sin sombra individual,
-   fondo sunk, texto tinta. */
+/* Skills — N3 (dirección Netflix): stat-cards sobre surface, barras de
+   lenguaje con fill en signal y pills del stack verificado. */
 
 .skills {
   background: var(--color-canvas);
   padding-block: var(--section-y);
   content-visibility: auto;
-  contain-intrinsic-size: auto 420px;
+  contain-intrinsic-size: auto 620px;
 }
 
-.skills ul {
+/* --- Stat-cards: datos reales de GitHub (repos, seguidores, commits, alta) --- */
+.skills__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-8);
+}
+
+.skills__stat {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition:
+    border-color var(--motion-quick) var(--ease-standard),
+    transform var(--motion-quick) var(--ease-standard);
+}
+
+.skills__stat:hover {
+  border-color: var(--color-signal);
+  transform: translateY(-2px);
+}
+
+.skills__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.skills__stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);   /* 8.79:1 sobre surface */
+}
+
+/* --- Barras de lenguaje: proporción real de bytes por lenguaje --- */
+.skills__langs {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-6);
+  max-width: 640px;
+}
+
+.skills__lang {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.skills__lang-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skills__lang-name {
+  color: var(--color-ink);
+}
+
+.skills__lang-share {
+  color: var(--color-ink-muted);
+}
+
+.skills__lang-bar {
+  display: block;
+  height: 6px;
+  background: var(--color-surface-sunk);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.skills__lang-fill {
+  display: block;
+  height: 100%;
+  background: var(--color-signal);
+  border-radius: var(--radius-pill);
+  transform-origin: left;
+}
+
+/* --- Fuente de datos: fecha de snapshot + link al perfil (honestidad) --- */
+.skills__source {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--color-ink-muted);
+}
+
+.skills__source a {
+  color: var(--color-signal-ink);  /* 5.64:1 sobre canvas */
+  text-decoration: underline;
+}
+
+.skills__source a:hover {
+  color: var(--color-ink);
+}
+
+/* --- Stack verificado del propietario (pills, DESIGN_SYSTEM.md §6.4) --- */
+.skills__stack {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
@@ -17,11 +129,21 @@
   margin: 0;
 }
 
-.skills li {
+.skills__stack li {
   font-family: var(--font-body);
   font-size: var(--text-body);
   background: var(--color-surface-sunk);
   color: var(--color-ink);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-pill);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__stat {
+    transition: none;
+  }
+
+  .skills__stat:hover {
+    transform: none;
+  }
 }

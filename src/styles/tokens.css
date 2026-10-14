@@ -1,30 +1,35 @@
 /* Tokens del sistema — única ubicación con valores sueltos (DESIGN_SYSTEM.md §2-§5).
-   Fase 2: set completo. Todo el CSS del sitio referencia estas variables. */
+   N1 (2026-10-14): dirección creativa "Netflix" — tema oscuro completo, rojo señal,
+   display condensada (Bebas Neue). Reemplaza la dirección anterior sobre papel. */
 
 :root {
-  /* Color — ratios verificados en DESIGN_SYSTEM.md §2 y §2.1 */
-  --color-canvas: #F4F2ED;        /* 16.19:1 con ink */
-  --color-surface: #FFFFFF;       /* tarjetas, formulario */
-  --color-surface-sunk: #E9E6DF;  /* fondos de inputs, pills */
-  --color-ink: #14161A;
-  --color-ink-muted: #5A6068;     /*  5.67:1 con canvas */
-  --color-line: #D6D2C8;          /* reglas y bordes (no-texto) */
-  --color-signal: #E4572E;        /*  3.29:1 → display/UI sobre papel */
-  --color-signal-ink: #B33A16;    /*  5.31:1 → acento COMO TEXTO sobre papel */
-  --color-signal-deep: #8F2D10;   /* hover de primarios (blanco: 8.2:1) */
-  --color-instrument: #1F4E5F;    /*  8.11:1 */
-  --color-success: #1B6B45;
-  --color-danger: #A3231C;
-  --color-focus-ring: #1F4E5F;    /*  anillo de foco (min 3:1) */
+  /* Color — ratios verificados sobre canvas #141414 (DESIGN_SYSTEM.md §2):
+     ink-muted  8.79:1 · signal-ink 5.64:1 · instrument 8.43:1 ·
+     success 9.47:1 · danger 6.64:1 · signal (UI/grande) 3.84:1 ·
+     blanco sobre signal 4.79:1 (botones primarios). */
+  --color-canvas: #141414;        /* fondo base (Netflix) */
+  --color-surface: #1F1F1F;       /* tarjetas, formulario, drawer */
+  --color-surface-sunk: #0B0B0B;  /* fondos de inputs, pills, filas */
+  --color-ink: #FFFFFF;
+  --color-ink-muted: #B3B3B3;     /*  8.79:1 con canvas */
+  --color-line: #333333;          /* reglas y bordes (no-texto) */
+  --color-signal: #E50914;        /*  3.84:1 → UI, display, bordes, botones */
+  --color-signal-ink: #FF4D4D;    /*  5.64:1 → acento COMO TEXTO sobre oscuro */
+  --color-signal-deep: #B20710;   /* hover de primarios (blanco: 6.7:1) */
+  --color-instrument: #8AB4D8;    /*  8.43:1 → kickers y metadata */
+  --color-success: #46D369;       /*  9.47:1 */
+  --color-danger: #FF6B6B;        /*  6.64:1 */
+  --color-focus-ring: #FFFFFF;    /*  17.9:1 — anillo de foco visible sobre todo */
 
-  /* Tipografía: auto-hospedada (@font-face en styles/fonts.css + preload en
-     index.html). La voz mono es de sistema → 0 kB. */
-  --font-display: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Tipografía: Bebas Neue (display, OFL, auto-hospedada en public/fonts) +
+     Inter (texto) + mono de sistema (@font-face en index.html + preload).
+     Bebas Neue solo tiene peso 400: nunca pedirle bold (genera fakes). */
+  --font-display: 'Bebas Neue', 'Arial Narrow', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
   /* Escala fluida (DESIGN_SYSTEM.md §3) */
-  --text-display: clamp(3rem, 1.6rem + 9vw, 7.5rem);
+  --text-display: clamp(3.5rem, 1.8rem + 10vw, 9rem);
   --text-h1: clamp(2rem, 1.5rem + 3vw, 3.5rem);
   --text-h2: clamp(1.5rem, 1.3rem + 1.2vw, 2.25rem);
   --text-body: clamp(1rem, 0.98rem + 0.1vw, 1.125rem);
@@ -47,18 +52,19 @@
   --container-max: 1200px;
   --section-y: clamp(4rem, 9vw, 8rem);
 
-  /* Radios y elevación (DESIGN_SYSTEM.md §4) */
+  /* Radios y elevación (DESIGN_SYSTEM.md §4) — Netflix usa radios mínimos */
   --radius-none: 0;
-  --radius-sm: 6px;
-  --radius-md: 12px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-pill: 999px;
-  --shadow-1: 0 1px 2px rgba(20, 22, 26, 0.06), 0 1px 1px rgba(20, 22, 26, 0.04);
-  --shadow-2: 0 8px 24px -8px rgba(20, 22, 26, 0.16);
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 12px 32px -8px rgba(0, 0, 0, 0.65);
 
   /* Z-index en escala única (DESIGN_SYSTEM.md §5) */
   --z-header: 100;
   --z-overlay: 200;
   --z-modal: 300;
+  --z-intro: 400;                 /* intro ta-dum: por encima de todo */
 
   /* Altura del header sticky: offset de anclas y del drawer móvil */
   --header-offset: 80px;

@@ -6,7 +6,45 @@
 
 ---
 
-## Estado actual
+## 🎬 Nueva dirección creativa (2026-10-14, aprobada por el propietario): "Netflix"
+
+El propietario cambió la dirección creativa: el sitio pasa a ser **una experiencia tipo
+Netflix** (fondo oscuro, rojo señal, tipografía display condensada, intro cinematográfica
+ tipo "ta-dum", tarjetas de proyectos como catálogo). **Reemplaza por completo** la
+dirección anterior "Campo/Órbita" sobre papel.
+
+**Decisiones del propietario (2026-10):**
+- Reemplazo total: todo el sitio en tema oscuro.
+- Tipografía display: **Bebas Neue** (auto-hospedada, OFL) — Inter para texto, mono de sistema.
+- Foto del hero: **pendiente del propietario** (hasta entonces, estado draft honesto con monograma).
+- Skills: **datos reales de GitHub** vía `scripts/fetch-github.js` (la API no expone
+  horas de trabajo: se muestran lenguajes, actividad y repos — nunca métricas inventadas).
+- Contacto: sección útil tanto para ofrecer trabajo como para proponer proyectos.
+- Sin dependencias ni MCPs nuevos: Motion + canvas 2D + fetch pre-build alcanzan.
+
+| Fase | Nombre | Estado |
+|---|---|---|
+| **N1** | Dirección creativa: tokens oscuros + Bebas Neue | ✅ Hecha y verificada |
+| N2 | Intro "ta-dum" + hero con foto/descripción | ✅ Hecha y verificada |
+| N3 | Skills con datos reales de GitHub | ✅ Hecha y verificada |
+| N4 | Catálogo de proyectos tipo Netflix | ✅ Hecha y verificada |
+| N5 | Experiencia + contacto | ✅ Hecha y verificada |
+| N6 | Pulido, verificación y presupuestos | ✅ Hecha y verificada |
+
+**Resultado N6 (2026-10-14):** build OK · 58/58 claves i18n · JS 117.91 kB gz ·
+CSS 4.50 kB gz · 18/18 checks estáticos. Docs actualizados: DESIGN_SYSTEM §2/§2.1/§3
+(tema oscuro + Bebas Neue), AGENTS §2 (`npm run fetch:github`). `alt` de la foto de
+About internacionalizado. Pendiente de verificación en vivo (viewports, teclado,
+reduce-motion) cuando haya navegador de escritorio disponible.
+
+**Resultados N1–N5 (2026-10-14):** build OK · 57/57 claves i18n · JS 117.90 kB gz ·
+CSS 4.50 kB gz (presupuestos: 150 / 10 kB). Bebas Neue auto-hospedada (13.7 kB woff2).
+`npm run fetch:github` → snapshot real: 5 lenguajes (C# 50 %, JS 33 %), 9 repos,
+7 commits/12 meses. `CaseStudyCard` reemplazado por `ProjectCard` (cover SVG + meta real).
+
+---
+
+## Estado actual (fases 0–9)
 
 | Fase | Nombre | Estado |
 |---|---|---|

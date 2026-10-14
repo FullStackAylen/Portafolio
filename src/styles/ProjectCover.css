@@ -1,0 +1,37 @@
+/* ProjectCover — arte SVG del cover (N4). Los fills salen de tokens: el cover
+   se adapta al tema sin tocar el componente. */
+
+.project-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface-sunk);
+}
+
+.project-cover__stripe {
+  fill: var(--color-signal);
+  opacity: 0.14;
+}
+
+.project-cover__initial {
+  font-family: var(--font-display);
+  font-size: 120px;
+  fill: var(--color-ink);
+  opacity: 0.1;
+}
+
+.project-cover__name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  fill: var(--color-ink);
+}
+
+.project-cover__lang {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--color-instrument);   /* 8.43:1 sobre surface-sunk */
+}
