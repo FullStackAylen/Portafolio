@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactiveLayer from './ReactiveLayer';
+import PrincipalPhoto from '../Assets/principal.jpeg';
 import '../styles/Hero.css';
 
 /**
@@ -52,22 +53,20 @@ function Hero({ paused = false }) {
           </span>
         </p>
 
-        {/* Retrato: estado draft honesto (AGENTS.md §3). El propietario todavía
-            no entregó la foto; el marco muestra un monograma con sus iniciales
-            reales y la nota pendiente. Al recibir la foto se reemplaza el
-            bloque `hero__photo-pending` por un <img> con width/height,
-            alt={t('hero_photo_alt')} y ≤120 kB (presupuesto AGENTS.md §8). */}
+        {/* Retrato real del propietario (2026-10-14): dimensiones explícitas
+            para proteger el CLS y alt localizado (AGENTS.md §7-§8). */}
         <figure className="hero__photo">
           <span className="hero__line">
             <span className="hero__line-inner hero__photo-inner">
-              <span className="hero__photo-pending" aria-hidden="true">
-                AR
-              </span>
+              <img
+                className="hero__photo-img"
+                src={PrincipalPhoto}
+                alt={t('hero_photo_alt')}
+                width={960}
+                height={1280}
+              />
             </span>
           </span>
-          <figcaption className="hero__photo-caption">
-            {t('hero_photo_pending')}
-          </figcaption>
         </figure>
 
         {/* Único h1 de la página (el logo del header pasó a ser texto). */}

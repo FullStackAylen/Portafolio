@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import '../styles/About.css';
-import Photo from '../Assets/MePhoto.jpeg';
+import Photo from '../Assets/about.jpeg';
 import { useTranslation } from 'react-i18next';
 import SectionHeading from './SectionHeading';
 import Reveal from './Reveal';
@@ -34,6 +34,8 @@ function About() {
                 className="profile-image"
                 src={Photo}
                 alt={t('photo_alt')}
+                width={938}
+                height={1533}
                 loading="lazy"
               />
             </div>
