@@ -21,13 +21,6 @@
   opacity: 0.1;
 }
 
-.project-cover__name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  fill: var(--color-ink);
-}
-
 .project-cover__lang {
   font-family: var(--font-mono);
   font-size: 11px;

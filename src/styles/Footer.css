@@ -1,0 +1,77 @@
+/* Footer — cierre del sistema: surface-sunk, wordmark display y canales
+   directos del propietario (email · WhatsApp · GitHub). */
+
+.footer {
+  width: 100%;
+  background: var(--color-surface-sunk);
+  border-top: 1px solid var(--color-line);
+  padding: var(--space-16) var(--gutter) var(--space-8);
+}
+
+.footer__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-8);
+}
+
+.footer__wordmark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h1);        /* Bebas es cap-height: ya escalado */
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.footer__tagline {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-body);
+  color: var(--color-ink-muted);    /* 8.79:1 sobre surface-sunk */
+}
+
+.footer__links,
+.footer__contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__links a,
+.footer__contact a {
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  font-size: var(--text-body);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--motion-quick) var(--ease-standard),
+    border-color var(--motion-quick) var(--ease-standard);
+}
+
+.footer__links a:hover,
+.footer__contact a:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-signal);
+}
+
+.footer__copy {
+  max-width: var(--container-max);
+  margin: var(--space-12) auto 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+}
+
+@media (min-width: 768px) {
+  .footer__inner {
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: start;
+  }
+}

@@ -1,0 +1,89 @@
+/* ScrollProgress — rail lateral de progreso (feedback del propietario).
+   La fill avanza con scaleY (solo transform, AGENTS.md §8.1); los puntos son
+   anclas reales a secciones con nombre accesible. Solo ≥1280px: en viewports
+   más chicos taparía el contenido (el nav del header ya cubre la navegación). */
+
+.scroll-rail {
+  position: fixed;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-rail);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+}
+
+.scroll-rail__track {
+  position: relative;
+  width: 2px;
+  height: 120px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.scroll-rail__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-signal);   /* la línea roja que avanza */
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+
+.scroll-rail__dots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Cada punto es un link con área de golpe de 24px (WCAG 2.2 target size) */
+.scroll-rail__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+}
+
+.scroll-rail__dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-line);
+  transition:
+    background-color var(--motion-base) var(--ease-standard),
+    transform var(--motion-base) var(--ease-standard);
+}
+
+.scroll-rail__dot:hover::before {
+  background: var(--color-signal-ink);
+}
+
+.scroll-rail__dot--active::before {
+  background: var(--color-signal);
+  transform: scale(1.5);
+}
+
+@media (min-width: 1280px) {
+  .scroll-rail {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-rail__dot::before {
+    transition: none;
+  }
+
+  .scroll-rail__dot--active::before {
+    transform: none;
+  }
+}

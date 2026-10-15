@@ -1,15 +1,12 @@
-/* Contact — tarjeta de formulario sobre superficie (DESIGN_SYSTEM.md).
-   N5: el contacto declara su propósito doble (trabajo + proyectos). */
+/* Contact — rediseño (feedback del propietario, 2026-10-14): dos columnas,
+   canales directos (email · WhatsApp) y formulario con inputs estilo Netflix
+   (fondo sunk, borde fino, foco en signal). Sección ancha como las demás. */
 
 .contact {
-  max-width: 640px;
+  width: 100%;
+  max-width: var(--container-max);
   margin-block: var(--section-y);
   margin-inline: auto;
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-8);
-  box-shadow: var(--shadow-1);
   content-visibility: auto;
   contain-intrinsic-size: auto 720px;
 }
@@ -18,16 +15,77 @@
   margin: 0 0 var(--space-8);
   font-size: var(--text-body);
   line-height: 1.65;
-  color: var(--color-ink-muted);   /* 8.10:1 sobre surface */
+  color: var(--color-ink-muted);   /* 8.10:1 sobre canvas */
   max-width: var(--measure);
 }
 
-.contact form {
-  display: flex;
-  flex-direction: column;
+.contact__grid {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
 }
 
-.contact form label {
+/* Canales directos: filas clickeables con icono + label mono + valor */
+.contact__channels {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.contact__channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-ink);
+  transition:
+    border-color var(--motion-base) var(--ease-standard),
+    transform var(--motion-base) var(--ease-standard);
+}
+
+.contact__channel:hover {
+  border-color: var(--color-signal);
+  transform: translateY(-2px);
+}
+
+.contact__channel-icon {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  color: var(--color-signal);      /* icono UI: 3.84:1 ✓ (3:1 mínimo) */
+}
+
+.contact__channel-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-instrument);  /* 8.43:1 sobre surface */
+}
+
+.contact__channel-value {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  word-break: break-word;
+}
+
+/* Formulario estilo Netflix: tarjeta surface + inputs sunk con foco rojo */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.contact__form label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -36,24 +94,44 @@
   margin-bottom: var(--space-2);
 }
 
-.contact form input,
-.contact form textarea {
+.contact__form input,
+.contact__form textarea {
   margin-bottom: var(--space-6);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-4);
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-line);
   background: var(--color-surface-sunk);
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: 1rem;                 /* ≥16px: evita zoom automático en iOS */
   color: var(--color-ink);
+  transition: border-color var(--motion-quick) var(--ease-standard);
 }
 
-.textarea {
-  resize: vertical;
-  min-height: 120px;
+.contact__form input::placeholder,
+.contact__form textarea::placeholder {
+  color: var(--color-ink-muted);
+  opacity: 0.7;
 }
 
-.contact form .button {
+.contact__form input:focus,
+.contact__form textarea:focus {
+  border-color: var(--color-signal);
+  outline: none;
+}
+
+.contact__form input:focus-visible,
+.contact__form textarea:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* La textarea no se redimensiona (decisión del propietario) */
+.contact__textarea {
+  resize: none;
+  min-height: 140px;
+}
+
+.contact__form .button {
   align-self: flex-end;
 }
 
@@ -81,4 +159,21 @@
 
 .contact__status--error {
   color: var(--color-danger);
+}
+
+@media (min-width: 900px) {
+  .contact__grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--space-12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__channel {
+    transition: border-color var(--motion-base) var(--ease-standard);
+  }
+
+  .contact__channel:hover {
+    transform: none;
+  }
 }

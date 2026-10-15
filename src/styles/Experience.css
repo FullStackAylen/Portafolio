@@ -24,19 +24,42 @@
   margin: 0;
   display: grid;
   gap: var(--space-8);
-  max-width: 720px;
 }
 
+/* Zigzag (feedback del propietario): ítems impares a la izquierda con barra
+   izquierda en signal; pares a la derecha con barra derecha en signal. La
+   barra sigue el lado de alineación. En móvil: todos a la izquierda. */
 .experience__item {
   display: grid;
   gap: var(--space-1);
-  border-left: 2px solid var(--color-line);
+  border-left: 2px solid var(--color-signal);
   padding-left: var(--space-6);
   transition: border-color var(--motion-base) var(--ease-standard);
 }
 
 .experience__item:hover {
-  border-color: var(--color-signal);
+  border-color: var(--color-signal-ink);
+}
+
+@media (min-width: 768px) {
+  .experience__item:nth-child(even) {
+    margin-left: auto;
+    border-left: none;
+    border-right: 2px solid var(--color-signal);
+    padding-left: 0;
+    padding-right: var(--space-6);
+    text-align: right;
+  }
+
+  .experience__item:nth-child(even):hover {
+    border-color: var(--color-signal-ink);
+  }
+
+  /* El párrafo largo no se alinea a la derecha (legibilidad); solo el resto */
+  .experience__item:nth-child(even) .experience__summary {
+    text-align: left;
+    margin-left: auto;
+  }
 }
 
 .experience__period {

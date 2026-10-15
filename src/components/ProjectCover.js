@@ -26,9 +26,8 @@ function ProjectCover({ project, language }) {
       <text className="project-cover__initial" x="160" y="132" textAnchor="middle">
         {initial}
       </text>
-      <text className="project-cover__name" x="16" y="166">
-        {project.name}
-      </text>
+      {/* Sin nombre en el cover: el título ya está en el encabezado de la card
+          (el propietario pidió no repetirlo). */}
       {language && (
         <text className="project-cover__lang" x="304" y="26" textAnchor="end">
           {language}

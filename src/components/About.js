@@ -43,6 +43,22 @@ function About() {
           <p>{t('about_p1')}</p>
           <p>{t('about_p2')}</p>
           <p>{t('about_p3')}</p>
+          {/* Datos personales reales del propietario (2026-10-14): ubicación,
+              formación en curso y título obtenido. */}
+          <dl className="about__facts">
+            <div className="about__fact">
+              <dt>{t('about_fact_location_label')}</dt>
+              <dd>{t('location')}</dd>
+            </div>
+            <div className="about__fact">
+              <dt>{t('about_fact_study_label')}</dt>
+              <dd>{t('about_fact_study')}</dd>
+            </div>
+            <div className="about__fact">
+              <dt>{t('about_fact_title_label')}</dt>
+              <dd>{t('about_fact_title')}</dd>
+            </div>
+          </dl>
           <blockquote>
             {t('quote')}
           </blockquote>

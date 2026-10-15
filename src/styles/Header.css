@@ -88,7 +88,9 @@
   background: none;
   border: none;
   padding: var(--space-2);
-  color: var(--color-instrument);
+  /* Rojo en reposo (feedback del propietario: el celeste chocaba); en hover
+     se enciende en signal-ink (rojo claro, 5.64:1) */
+  color: var(--color-signal);
   font-size: 1.1rem;
   cursor: pointer;
   transition: color var(--motion-quick) var(--ease-standard);

@@ -67,6 +67,31 @@ El propietario reemplazó todo el contenido real. Correcciones de integración h
   público se menciona en la sección Skills (link "Ver perfil").
 - Build: 60/60 claves · JS 120.47 kB gz · CSS 4.50 kB gz · todo verde.
 
+### Pulido visual y de contenido (2026-10-14, 3.ª tanda — feedback del propietario)
+
+- **Cards de proyecto**: case study colapsado tras botón "Ver más/Ver menos"
+  (aria-expanded + aria-controls, por encima del stretched-link); botón
+  "Ver web" (clave `viewProj` renombrada); cover SVG ya no repite el nombre
+  del proyecto (solo el título en la card); alturas iguales en la fila
+  (`.project-card { height: 100% }`).
+- **Selector de idioma**: el icono del globo pasó de `instrument` (celeste) a
+  `signal` (rojo), hover en `signal-ink`.
+- **Contacto rediseñado**: layout en dos columnas (≥900px) — canales directos
+  email + WhatsApp (datos reales en `src/data/profile.js`, nuevos) y formulario
+  estilo Netflix (inputs sunk con foco rojo, textarea sin resize, 1rem para
+  evitar zoom en iOS).
+- **ScrollProgress (nuevo)**: rail lateral fijo ≥1280px con línea roja que
+  avanza con el scroll (useScroll + useSpring sobre scaleY, MotionValues) y
+  puntos-rojo por sección activa (IntersectionObserver, sin setState por
+  frame). Con reduce-motion: indicador estático sin resorte.
+- **Footer (nuevo)**: wordmark display + tagline, navegación rápida, canales
+  directos (email · WhatsApp · GitHub) y © con año runtime.
+- **About**: lista de datos personales reales (Ubicación: Rosario, Argentina ·
+  Estudiando: Ingeniería en Sistemas · Título: Técnica Analista en Sistemas).
+- **Experiencia en zigzag**: ítems impares izquierda / pares derecha (≥768px);
+  la barra lateral ahora es `signal` (roja) y sigue el lado de alineación.
+- Build: 74/74 claves i18n · JS 123.48 kB gz · CSS 5.19 kB gz · todo verde.
+
 **Resultados N1–N5 (2026-10-14):** build OK · 57/57 claves i18n · JS 117.90 kB gz ·
 CSS 4.50 kB gz (presupuestos: 150 / 10 kB). Bebas Neue auto-hospedada (13.7 kB woff2).
 `npm run fetch:github` → snapshot real: 5 lenguajes (C# 50 %, JS 33 %), 9 repos,

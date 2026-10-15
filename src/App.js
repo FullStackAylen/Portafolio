@@ -9,6 +9,8 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Skills from './components/Skills';
+import ScrollProgress from './components/ScrollProgress';
+import Footer from './components/Footer';
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion';
 import './i18n';
 
@@ -31,6 +33,8 @@ function App() {
         <a className="skip-link" href="#hero">{t('skip_to_content')}</a>
         {introActive && <NetflixIntro onDone={endIntro} />}
         <Header />
+        {/* Rail de progreso lateral (≥1280px): línea roja + puntos por sección */}
+        <ScrollProgress />
         {/* paused: la cascada del hero espera al final de la intro y arranca
             desde el beat 0 (pausa, no reinicio). */}
         <Hero paused={introActive} />
@@ -41,6 +45,7 @@ function App() {
           <Projects />
           <Contact />
         </main>
+        <Footer />
       </div>
     </MotionConfig>
   );

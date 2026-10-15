@@ -61,6 +61,7 @@
   --shadow-2: 0 12px 32px -8px rgba(0, 0, 0, 0.65);
 
   /* Z-index en escala única (DESIGN_SYSTEM.md §5) */
+  --z-rail: 90;                  /* rail de progreso lateral: bajo el header */
   --z-header: 100;
   --z-overlay: 200;
   --z-modal: 300;

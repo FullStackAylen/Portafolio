@@ -5,6 +5,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;                 /* cards de la fila con altura igual */
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
@@ -74,6 +75,12 @@
   gap: var(--space-2);
 }
 
+/* El `hidden` del HTML debe ganarle al display:grid de arriba (si no, el
+   case study expandido-colapsado quedaría siempre visible) */
+.project-card__fields[hidden] {
+  display: none;
+}
+
 .project-card__fields dt {
   font-family: var(--font-mono);
   font-size: var(--text-label);
@@ -89,10 +96,42 @@
   color: var(--color-ink);
 }
 
+/* Fila de acciones: "Ver más" (toggle del case study) + link al deploy.
+   El botón vive por encima del stretched-link (z-index) para poder expandir
+   sin navegar; ambos son controles reales (AGENTS.md §7). */
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  align-self: flex-start;
+}
+
+.project-card__more {
+  position: relative;
+  z-index: 2;                    /* por encima del stretched-link (z-index 1) */
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body);
+  color: var(--color-signal-ink);   /* 5.64:1 sobre surface */
+  border-bottom: 1px solid var(--color-signal);
+  cursor: pointer;
+  transition: color var(--motion-quick) var(--ease-standard);
+}
+
+.project-card__more:hover {
+  color: var(--color-ink);
+}
+
 /* Link estirado: el pseudo cubre toda la card y dispara el link al deploy. */
 .project-card__link {
-  align-self: flex-start;
-  margin-top: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .project-card__link::after {
