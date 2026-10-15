@@ -28,12 +28,12 @@ function Experience() {
         <ol className="experience__list">
           {experience.map((item) => (
             <Reveal as="li" key={item.id} className="experience__item">
-              <p className="experience__period">{item.period}</p>
-              <h3 className="experience__role">{item.role}</h3>
+              <p className="experience__period">{t(item.periodKey)}</p>
+              <h3 className="experience__role">{t(item.roleKey)}</h3>
               <p className="experience__company">{item.company}</p>
               {/* El propietario separa párrafos con \n\n: se preservan. */}
-              {item.summary &&
-                item.summary
+              {t(item.summaryKey) &&
+                t(item.summaryKey)
                   .split('\n\n')
                   .filter(Boolean)
                   .map((paragraph, i) => (

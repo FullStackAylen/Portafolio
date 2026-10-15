@@ -92,6 +92,21 @@ El propietario reemplazó todo el contenido real. Correcciones de integración h
   la barra lateral ahora es `signal` (roja) y sigue el lado de alineación.
 - Build: 74/74 claves i18n · JS 123.48 kB gz · CSS 5.19 kB gz · todo verde.
 
+### Fotos reales + i18n completo (2026-10-14, 4.ª tanda)
+
+- **Fotos del propietario conectadas**: `principal.jpeg` (hero, 960×1280) y
+  `about.jpeg` (About, 938×1533), ambas recomprimidas al presupuesto (118.5 /
+  114.8 kB ≤ 120 kB) con `width`/`height` explícitos. El draft del monograma
+  "AR" y la clave `hero_photo_pending` se reemplazaron por `hero_photo_alt`.
+  `MePhoto.jpeg` eliminada (superada por `principal.jpeg`).
+- **i18n completado**: los textos de `src/data/` (experiencia y case studies)
+  estaban solo en español. Se migraron a claves i18n siguiendo el patrón
+  `descriptionKey` (`exp_*` y `case_*`): datos ahora solo referencian claves;
+  ES conserva el texto literal del propietario, EN es traducción fiel.
+  Nuevas claves: `exp_janus_*`, `exp_gestioner_*`, `case_finance_*`,
+  `case_samaritana_*` (rol, período, resumen, problema, decisiones, resultado).
+- Build: **88/88 claves i18n** · JS 125.02 kB gz · CSS 5.15 kB gz · todo verde.
+
 **Resultados N1–N5 (2026-10-14):** build OK · 57/57 claves i18n · JS 117.90 kB gz ·
 CSS 4.50 kB gz (presupuestos: 150 / 10 kB). Bebas Neue auto-hospedada (13.7 kB woff2).
 `npm run fetch:github` → snapshot real: 5 lenguajes (C# 50 %, JS 33 %), 9 repos,

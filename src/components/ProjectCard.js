@@ -24,7 +24,7 @@ function ProjectCard({ project, ghRepo }) {
   const [expanded, setExpanded] = useState(false);
   const cs = project.caseStudy || {};
   const hasStudy = Boolean(
-    cs.problem || cs.role || (cs.stack && cs.stack.length) || cs.decisions || cs.outcome
+    cs.problemKey || cs.roleKey || (cs.stack && cs.stack.length) || cs.decisionsKey || cs.outcomeKey
   );
 
   const pushedLabel = ghRepo
@@ -53,10 +53,10 @@ function ProjectCard({ project, ghRepo }) {
 
         {hasStudy && (
           <dl className="project-card__fields" id={`case-${project.id}`} hidden={!expanded}>
-            {cs.role && (
+            {cs.roleKey && (
               <>
                 <dt>{t('case_role')}</dt>
-                <dd>{cs.role}</dd>
+                <dd>{t(cs.roleKey)}</dd>
               </>
             )}
             {cs.stack && cs.stack.length > 0 && (
@@ -65,22 +65,22 @@ function ProjectCard({ project, ghRepo }) {
                 <dd>{cs.stack.join(' · ')}</dd>
               </>
             )}
-            {cs.problem && (
+            {cs.problemKey && (
               <>
                 <dt>{t('case_problem')}</dt>
-                <dd>{cs.problem}</dd>
+                <dd>{t(cs.problemKey)}</dd>
               </>
             )}
-            {cs.decisions && (
+            {cs.decisionsKey && (
               <>
                 <dt>{t('case_decisions')}</dt>
-                <dd>{cs.decisions}</dd>
+                <dd>{t(cs.decisionsKey)}</dd>
               </>
             )}
-            {cs.outcome && (
+            {cs.outcomeKey && (
               <>
                 <dt>{t('case_outcome')}</dt>
-                <dd>{cs.outcome}</dd>
+                <dd>{t(cs.outcomeKey)}</dd>
               </>
             )}
           </dl>
