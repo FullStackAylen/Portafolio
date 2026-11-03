@@ -33,7 +33,7 @@ export const projects = [
     name: 'Samaritana — E-commerce',
     descriptionKey: 'project_samaritana',
     link: 'https://frontend-blush-mu-29.vercel.app/tienda',
-    repository: '', // URL real del repositorio (pendiente del propietario)
+    repository: 'https://github.com/FullStackAylen/Samaritana.git', // URL real del repositorio (pendiente del propietario)
     caseStudy: {
       problemKey: 'case_samaritana_problem',
       roleKey: 'case_samaritana_role',
@@ -56,6 +56,31 @@ export const projects = [
       ],
       decisionsKey: 'case_samaritana_decisions',
       outcomeKey: 'case_samaritana_outcome'
+    }
+  },
+  {
+    id: 'fitnessApp',
+    name: 'Kenko fitnessApp — Fitness Tracker',
+    descriptionKey: 'project_fitnessApp',
+    link: 'https://v0-fitnessapp-fitlife.vercel.app/login',
+    repository: 'https://github.com/FullStackAylen/FitnessApp-FitLife.git', // URL real del repositorio (pendiente del propietario)
+    caseStudy: {
+      problemKey: 'case_fitnessApp_problem',
+      roleKey: 'case_fitnessApp_role',
+      stack: [
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Tailwind CSS',
+        'shadcn/ui',
+        'Drizzle ORM',
+        'Vercel Postgres (Neon)',
+        'Auth.js v5',
+        'Vitest',
+        'Playwright'
+      ],
+      decisionsKey: 'case_fitnessApp_decisions',
+      outcomeKey: 'case_fitnessApp_outcome'
     }
   }
 ];
